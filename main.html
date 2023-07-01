@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Web Workspace </title>
+  <title>WEB WORKSPACE </title>
   <link rel="icon" type="image/x-icon" href="https://www.seiu1000.org/sites/main/files/main-images/camera_lense_0.jpeg">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -22,84 +22,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    .no-padding {
-      width: 100% !important;
-      height: 30% !important;
-      padding: 0 0 100 10 !important;
-      margin: 0 0 100 10 !important;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
-    }
-
-    .scrollable-element {
-      width: 200px;
-      height: 300px;
-      overflow: auto;
-    }
-
-    .card {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-      transition: background-color 0.3s ease;
-
-    }
-
-    .card:hover {
-      background-color: lightblue;
-    }
-
-    body {
-      padding: 0;
-      box-sizing: border-box;
-      margin: 0;
-      background-color: rgb(244, 238, 238);
-    }
-
-    title {
-      color: blue;
-    }
-
-    div {
-      margin: 0 0 0 0;
-      padding: 0 0 0 0;
-      background-color: gray;
-    }
-
-    .no-strike {
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      padding: 12px;
-      color: black;
-      letter-spacing: 0px;
-    }
-
-    .material-symbols-outlined {
-      font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 48
-    }
-
-    .fa {
-      font-size: 5em;
-      color: #fff;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .button-clicked {
-      background-color: yellow;
-      color: bisque;
-    }
-
-    .custom-cursor {
-      cursor: pointer;
-    }
   </style>
 
   <div class="no-padding">
@@ -119,109 +42,107 @@
 
     </ul>
   </div>
+  <header>
+    <button id="modeToggle" onclick="toggleMode()">Toggle Mode</button>
+  </header>
 
   <button id="mode-toggle">Toggle Mode</button>
 
-
-  <style>
-    /* CSS styles for the logo */
-    .logo {
-      display: block;
-      max-width: 200px;
-      /* Adjust the width as needed */
-      height: auto;
-    }
-  </style>
-
-
-
 </head>
 
-<body>
-  <header>
-    <!--<img class="fa fa-shopping-cart" style="font-size: 36px;" alt="Shopie">-->
-  </header>
 
-  <i id="m" class="fa fa-address-book" style="font-size:36px"></i>
+<div class="main-container">
 
-  <p>this is the description.</p>
-  <!-- Rest of your website content -->
-  <div class=" card">
-    <h3 style="padding: 0; margin: 0;">Clothes</h3>
-    <p>This is the content of the card.</p>
+  <body>
 
-    <div class="card" style="width: 120px; height: 200px; background-color: beige;">
 
-      <p>this is inner card</p>
+    <i id="m" class="fa fa-address-book" style="font-size:36px"></i>
+
+
+
+    <p>this is the description.</p>
+    <div class=" card">
+      <h3 style="padding: 0; margin: 0px;">Clothes</h3>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
+      <div class="card" style="width: 120px; height: 200px; background-color: beige;">
+        <p>this is inner card</p>
+      </div>
     </div>
-  </div>
+
+    <div class="scrollable-container">
+      <div class="scrollable-content">
+        <p>This is the scrollable content that will overflow horizontally.</p>
+        <p>You can add more content here to make it scrollable.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </div>
 
 
-  <footer>this is a footer at the end of the content.</footer>
+</div>
+
+<footer>this is a footer at the end of the content.</footer>
 
 
-  <style>
-    /* Example styles for the header */
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-    }
+<style>
+  /* Example styles for the header */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
 
-    h1 {
-      margin: 0;
-    }
-  </style>
+  h1 {
+    margin: 0;
+  }
+</style>
 
-  <header>
-    <h1>Website Header</h1>
+
+
+
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2023 Your Website. All rights reserved.</p>
     <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+      <a href="#" class="footer-link">Home</a>
+      <a href="#" class="footer-link">About</a>
+      <a href="#" class="footer-link">Services</a>
+      <a href="#" class="footer-link">Contact</a>
+      <a href="https://www.example.com" target="_blank">Open in new window</a>
     </nav>
-  </header>
-
-  <style>
-    /* Example styles for the footer */
-    footer {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .footer-link {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-  </style>
-
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2023 Your Website. All rights reserved.</p>
-      <nav>
-        <a href="#" class="footer-link">Home</a>
-        <a href="#" class="footer-link">About</a>
-        <a href="#" class="footer-link">Services</a>
-        <a href="#" class="footer-link">Contact</a>
-        <a href="https://www.example.com" target="_blank">Open in new window</a>
-
-      </nav>
-    </div>
-  </footer>
-  <script src="script.js"></script>
-  </button>
+  </div>
+</footer>
+<script src="script.js"></script>
+</button>
 </body>
 
 </html>

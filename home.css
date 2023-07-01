@@ -20,7 +20,11 @@
     }
     
     ul.nav li a:hover {
-      background-color: #ddd;
+      background-color: #de1f1f;
+    }
+
+    ul a:hover{
+      color: rgb(255, 157, 0);
     }
 
 
@@ -29,6 +33,7 @@
       background-color: #333;
       color: #f2f2f2;
     }
+
     
     header.dark-mode {
       background-color: #666;
@@ -38,9 +43,143 @@
       cursor: pointer;
     }
 
+    card card:hover {
+        background-color: aqua;
+    }
+
     li:hover {
       cursor: pointer;
   }
 
+  .no-padding {
+    width: 100% !important;
+    height: 30% !important;
+    padding: 0 0 100 10 !important;
+    margin: 0 0 100 10 !important;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  }
+
+  .scrollable-element {
+    width: 200px;
+    height: 300px;
+    overflow: auto;
+  }
+
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: inline-block;
+
+
+  }
+
+  .card:hover {
+    background-color: lightblue;
+  }
+
+  body {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: rgb(244, 238, 238);
+  }
+
+  title {
+    color: blue;
+  }
+
+  div {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-color: gray;
+  }
+
+  .no-strike {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 12px;
+    color: black;
+    letter-spacing: 0px;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48
+  }
+
+  .fa {
+    font-size: 5em;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .button-clicked {
+    background-color: yellow;
+    color: bisque;
+  }
+
+  .custom-cursor {
+    cursor: pointer;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+
+
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-link {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  .logo {
+    display: block;
+    max-width: 200px;
+    /* Adjust the width as needed */
+    height: auto;
+  }
+
+  .main-container{
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+
+  .scrollable-container {
+    width: 300px; /* Adjust the width to your desired value */
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .scrollable-content {
+    display: inline-block;
+  }
 
   

@@ -106,12 +106,12 @@ iconAr.addEventListener('click', function(){
 
 function changeContent(icon){
   icon.classList.toggle("fa-moon");
-  if(icon.className == "fa-moon"){
-    body.classList.toggle(dark-mode);
-  }else{
-    body.classList.toggle(mode);
-
+  if (body.classList.contains('dark-mode')) {
+    body.classList.remove('dark-mode');
+  } else {
+    body.classList.add('dark-mode');
   }
+
 
   /*icon.classList.remove("fa-sun");
   icon.classList.add("fa-moon");
