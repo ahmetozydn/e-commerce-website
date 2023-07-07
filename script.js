@@ -4,11 +4,60 @@ const modeIcon = document.getElementById("change-mode-icon")
 const body = document.body;
 const firstIcon = document.getElementById("m");
 const favIcon = document.getElementById('fav');
+
+
+
+
+
+
 favIcon.innerHTML = 'star';
+
+
+
+
+
+
 firstIcon.addEventListener('click', function () {
   firstIcon.classList.remove('fa-address-book');
   firstIcon.classList.add('fa-shopping-cart');
 });
+
+modeToggle.addEventListener("click", function () {
+  body.classList.toggle("dark-mode");
+  console.log('Icon clicked!');
+});
+
+icon.addEventListener('click', function () {
+  // Perform your desired action here
+  console.log('Icon clicked!');
+});
+
+button.addEventListener('click', function () {
+  button.classList.add('button-clicked');
+  btn.style.backgroundColor = 'salmon';
+  btn.style.color = 'white';
+  // Toggle the icon between favorite and favorite_border
+  if (icon1.innerHTML === 'favorite') {
+    icon1.innerHTML = 'light_mode';
+  } else {
+    icon1.innerHTML = 'favorite';
+  }
+});
+
+button1.addEventListener('click', function() {
+  // Your click event handling code here
+  innerIcon.innerHTML = 'star';
+});
+
+iconAr.addEventListener('click', function(){
+  if(iconAr.innerHTML === "play_arrow"){
+   iconAr.innerHTML = "home";
+  }else{
+   iconAr.innerHTML = "star";
+  }
+   }
+   );
+
 
 function change(t) {
   t.innerHTML = "star";
@@ -16,10 +65,7 @@ function change(t) {
 
 console.log("this is the first consolo message");
 
-modeToggle.addEventListener("click", function () {
-  body.classList.toggle("dark-mode");
-  console.log('Icon clicked!');
-});
+
 
 /*changeModeIcon.addEventListener('click',function(){
 
@@ -39,10 +85,6 @@ let changeIcon = function (x) {
 
 const icon = document.getElementById('myIcon');
 
-icon.addEventListener('click', function () {
-  // Perform your desired action here
-  console.log('Icon clicked!');
-});
 
 function myFunction() {
   console.log("messages");
@@ -51,25 +93,12 @@ function myFunction() {
 const button = document.getElementById('myButton');
 const icon1 = document.getElementById('myIcon');
 
-button.addEventListener('click', function () {
-  button.classList.add('button-clicked');
-  btn.style.backgroundColor = 'salmon';
-  btn.style.color = 'white';
-  // Toggle the icon between favorite and favorite_border
-  if (icon1.innerHTML === 'favorite') {
-    icon1.innerHTML = 'light_mode';
-  } else {
-    icon1.innerHTML = 'favorite';
-  }
-});
+
 
 const button1 = document.getElementById('myButton');
 const innerIcon = document.getElementById('innerIcon');
 
-button1.addEventListener('click', function() {
-  // Your click event handling code here
-  innerIcon.innerHTML = 'star';
-});
+
 
 const span = document.getElementById('mySpan');
 
@@ -80,14 +109,7 @@ span.addEventListener('click', function() {
 
 const iconAr = document.getElementById("iconArrow");
 
-iconAr.addEventListener('click', function(){
- if(iconAr.innerHTML === "play_arrow"){
-  iconAr.innerHTML = "home";
- }else{
-  iconAr.innerHTML = "star";
- }
-  }
-  );
+
 
   function handleClick(){
     iconAr.classList.toggle("home");
@@ -120,3 +142,4 @@ function changeContent(icon){
     body.classList.toggle(dark_mode);
     console.log(name); */
   }
+

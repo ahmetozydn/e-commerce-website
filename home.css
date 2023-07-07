@@ -182,4 +182,16 @@
     display: inline-block;
   }
 
+
+  .data{
+    width: 700px;
+    background-color: antiquewhite;
+    height: 400px;
+    color: #000;
+  }
+
+  ::selection{
+    color: white;
+    background-color: #000;
+  }
   
