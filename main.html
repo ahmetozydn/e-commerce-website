@@ -141,12 +141,29 @@
 
 </p>
 
-<p id = "data-output"></p>
+<p id="data-output"></p>
+
+<pre id="json-output"></pre>
 
 
-<script >
-src = "server.js"
+
+
+<script>
+  <!-- src = "server.js"-->
+
+  fetch('./data/products.json')
+    .then(response => response.json())
+    .then(data => {
+        // Display the JSON data in the UI
+        const jsonOutput = document.getElementById('json-output');
+        jsonOutput.textContent = JSON.stringify(data, null, 2);
+    })
+    .catch(error => {
+        console.log('Error:', error);
+    });
 </script>
+
+
 </body>
 
 </html>
