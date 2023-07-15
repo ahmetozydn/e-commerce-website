@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail Page</title>
+
+    <style>
+        body{
+            margin: 0px;
+            color: #000;
+            margin-left: 200px;
+            margin-right: 200px;
+            
+        }
+        .main-container {
+            display: flex;
+            align-items: center;
+            min-height: 100vh; 
+        }
+
+        .description {
+            margin-left: 10px;
+            /* Adjust this value as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navigation-placeholder"></div>
+
+    <div class="main-container">
+        <img src="https://media.istockphoto.com/id/1093110112/photo/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-of-green-forest-with-pure.jpg?s=612x612&w=0&k=20&c=lpQ1sQI49bYbTp9WQ_EfVltAqSP1DXg0Ia7APTjjxz4=" alt="Image">
+        <div class="description">
+            <h3>Image Title</h3>
+            <p>Image description goes here.</p>
+        </div>
+    </div>
+
+      <div id="footer-placeholder"></div>
+    <script>
+        // Fetch the navigation.html file
+        fetch('navigation.html')
+          .then(response => response.text())
+          .then(data => {
+            // Insert the navigation code into the placeholder div
+            document.getElementById('navigation-placeholder').innerHTML = data;
+          });
+
+          fetch('./footer.html')
+          .then(response => response.text())
+          .then(data => {
+            // Insert the navigation code into the placeholder div
+            document.getElementById('footer-placeholder').innerHTML = data;
+          });
+      </script>
+</body>
+
+</html>

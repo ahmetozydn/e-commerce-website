@@ -1,0 +1,66 @@
+<style>
+        ul.nav {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #f1f1f1;
+    }
+    
+    ul.nav li {
+      display: inline;
+    }
+    
+    ul.nav li a {
+      display: block;
+      padding: 8px 16px;
+      text-decoration: none;
+      color: #000;
+    }
+    
+    ul.nav li a:hover {
+      background-color: #de1f1f;
+    }
+
+    ul a:hover{
+      color: rgb(255, 157, 0);
+    }
+    .no-padding {
+    width: 100% !important;
+    height: 30% !important;
+    padding: 0 0 100 10 !important;
+    margin: 0 0 100 10 !important;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  }
+  .icon {
+      cursor: pointer;
+    }
+
+    .no-strike {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 12px;
+    color: black;
+    letter-spacing: 0px;
+  }
+</style>
+
+<div class="no-padding">
+    <ul class="nav" style="padding: 20px; margin: 0;">
+      <span class="icon">
+        <i class="fas fa-home"></i>
+      </span>
+
+      <span class="website-name"><h2 style="display: inline; color: #f0900a;">Shopie</h2></span> <!-- Website Name -->
+      <a class="no-strike" href="demo.html">Home</a>
+      <a class="no-strike" href="electronic.html">Electronic</a>
+      <a class="no-strike" href="productDetails.html">Clothing</a>
+      <a class="no-strike" href="#">Sport</a>
+      <a class="no-strike" href="#">Home&Decoration</a>
+      <a class="no-strike" href="temp.html">.temp</a>
+      <i class="fa-regular fa-lightbulb custom-cursor" onclick="changeContent(this)" style="transform: scale(1.5);"></i>
+
+    </ul>
+  </div>
