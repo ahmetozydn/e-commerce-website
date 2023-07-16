@@ -7,17 +7,20 @@
     <title>Product Detail Page</title>
 
     <style>
-        body{
+        body {
             margin: 0px;
             color: #000;
             margin-left: 200px;
             margin-right: 200px;
-            
+
         }
+
         .main-container {
+            margin-left: 200px;
+            margin-right: 200px;
             display: flex;
             align-items: center;
-            min-height: 100vh; 
+            min-height: 100vh;
         }
 
         .description {
@@ -31,30 +34,52 @@
     <div id="navigation-placeholder"></div>
 
     <div class="main-container">
-        <img src="https://media.istockphoto.com/id/1093110112/photo/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-of-green-forest-with-pure.jpg?s=612x612&w=0&k=20&c=lpQ1sQI49bYbTp9WQ_EfVltAqSP1DXg0Ia7APTjjxz4=" alt="Image">
+        <img id = "product-image"src="https://media.istockphoto.com/id/1093110112/photo/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-of-green-forest-with-pure.jpg?s=612x612&w=0&k=20&c=lpQ1sQI49bYbTp9WQ_EfVltAqSP1DXg0Ia7APTjjxz4="
+            alt="Image">
         <div class="description">
-            <h3>Image Title</h3>
-            <p>Image description goes here.</p>
+            <h3 id="product-name">Image Title</h3>
+            <p id="product-description">Image description goes here.</p>
         </div>
     </div>
-
-      <div id="footer-placeholder"></div>
+    <div id="footer-placeholder"></div>
     <script>
         // Fetch the navigation.html file
         fetch('navigation.html')
-          .then(response => response.text())
-          .then(data => {
-            // Insert the navigation code into the placeholder div
-            document.getElementById('navigation-placeholder').innerHTML = data;
-          });
+            .then(response => response.text())
+            .then(data => {
+                // Insert the navigation code into the placeholder div
+                document.getElementById('navigation-placeholder').innerHTML = data;
+            });
 
-          fetch('./footer.html')
-          .then(response => response.text())
-          .then(data => {
-            // Insert the navigation code into the placeholder div
-            document.getElementById('footer-placeholder').innerHTML = data;
-          });
-      </script>
+        fetch('./footer.html')
+            .then(response => response.text())
+            .then(data => {
+                // Insert the navigation code into the placeholder div
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+
+        const url = window.location.href;
+        const searchParams = url.searchParams;
+        /*           const productName = searchParams.get('name');
+                  console.log('URL:', url);
+                  console.log('name: ', productName) */
+        const productName = new URLSearchParams(window.location.search).get('name');
+        console.log(productName);
+        const productDetails = document.getElementById('product-name');
+        const productDescription = document.getElementById('product-description');
+        const productImage = document.getElementById('product-image');
+        fetch('./data/products.json')
+            .then(response => response.json())
+            .then(data => {
+                for (let key in data) {
+                    if (data[key].name == productName) {
+                        productDetails.innerText = productName;
+                        productDescription.innerText = data[key].Description;
+                        productImage.src = data[key].productImage;
+                    }
+                }
+            });
+    </script>
 </body>
 
 </html>
