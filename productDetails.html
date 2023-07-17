@@ -14,6 +14,10 @@
             margin-right: 200px;
 
         }
+        body.dark-mode{
+            color: white;
+            background-color: #000;
+        }
 
         .main-container {
             margin-left: 200px;
@@ -34,7 +38,8 @@
     <div id="navigation-placeholder"></div>
 
     <div class="main-container">
-        <img id = "product-image"src="https://media.istockphoto.com/id/1093110112/photo/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-of-green-forest-with-pure.jpg?s=612x612&w=0&k=20&c=lpQ1sQI49bYbTp9WQ_EfVltAqSP1DXg0Ia7APTjjxz4="
+        <img id="product-image"
+            src="https://media.istockphoto.com/id/1093110112/photo/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-of-green-forest-with-pure.jpg?s=612x612&w=0&k=20&c=lpQ1sQI49bYbTp9WQ_EfVltAqSP1DXg0Ia7APTjjxz4="
             alt="Image">
         <div class="description">
             <h3 id="product-name">Image Title</h3>
@@ -43,6 +48,12 @@
     </div>
     <div id="footer-placeholder"></div>
     <script>
+        const prefersDarkMode = localStorage.getItem('dark-mode-preference');
+        if (prefersDarkMode === 'dark') {
+            document.body.classList.add('dark-mode');
+            console.log("dark mode details page");
+        }
+
         // Fetch the navigation.html file
         fetch('navigation.html')
             .then(response => response.text())
@@ -79,6 +90,9 @@
                     }
                 }
             });
+
+        
+
     </script>
 </body>
 

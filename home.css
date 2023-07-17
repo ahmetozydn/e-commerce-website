@@ -7,7 +7,6 @@
       overflow: hidden;
       background-color: #f1f1f1;
     }
-    
     ul.nav li {
       display: inline;
     }
@@ -27,17 +26,12 @@
       color: rgb(255, 157, 0);
     }
 
-
-
     body.dark-mode {
-      background-color: #333;
-      color: #f2f2f2;
+      background-color: #282626;
     }
 
     
-    header.dark-mode {
-      background-color: #666;
-    }
+
 
     .icon {
       cursor: pointer;
@@ -59,6 +53,7 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
   }
+  
 
   .scrollable-element {
     width: 200px;
@@ -196,7 +191,14 @@
     margin-left: 150px;
     margin-right: 150px;
     min-height: 80vh;
+
+   
   }
+  .main-container::dark-mode{
+    background-color: #000 !important;
+    color: #000 !important;
+  }
+  
 
   .scrollable-container {
     width: 300px; /* Adjust the width to your desired value */
@@ -231,6 +233,12 @@
   #main-card-container:active {
     cursor: grabbing;
 }
+
+}
+
+#main-card-container.dark-mode{
+  background-color: #000;
+  color: #000;
 }
 
 * {box-sizing:border-box}

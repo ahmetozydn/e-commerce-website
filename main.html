@@ -47,7 +47,6 @@
     </ul>
   </div>
 
-
 </head>
 <div class="main-container">
 
@@ -118,6 +117,16 @@
 
 <script>
   <!-- src = "server.js"-->
+  const mainCardContainer = document.getElementById('main-card-container');
+  //const header = document.getElementsByClassName('main-container');
+
+  const prefersDarkMode = localStorage.getItem('dark-mode-preference');
+  if(prefersDarkMode === 'dark'){
+    document.body.classList.toggle('dark-mode');
+    mainCardContainer.classList.toggle('dark-mode');
+    //header.classList.toggle('dark-mode');
+    
+  }
 
   //const container = document.getElementById('json-container');
   // Fetch the JSON file
@@ -144,7 +153,6 @@
         const content = `
 <p>this is a paraghraph ${data[key].name}</p>
 `
-        const mainCardContainer = document.getElementById('main-card-container');
 
         // Get the paragraph element by ID
 
@@ -273,6 +281,30 @@ for (var i=0; i<cards.length; i++) {
 }
 
 }); 
+
+function changeContent(icon){
+const body = document.body;
+  
+  body.classList.toggle('dark-mode');
+  icon.classList.toggle("fa-moon");
+ 
+  if (body.classList.contains('dark-mode')) {
+    localStorage.setItem('dark-mode-preference', 'dark');
+    //body.classList.remove('dark-mode');
+    console.log("dark mode");
+  } else {
+    //body.classList.add('dark-mode');
+    localStorage.setItem('dark-mode-preference', 'light');
+    console.log("light mode");
+  }
+
+  /*icon.classList.remove("fa-sun");
+  icon.classList.add("fa-moon");
+  var name = icon.className;
+  if(name == "fa-regular fa-sun"){
+    body.classList.toggle(dark_mode);
+    console.log(name); */
+  }
 
 </script>
 
