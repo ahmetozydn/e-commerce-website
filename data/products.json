@@ -40,7 +40,7 @@
    },
    {
      "id": 3,
-     "name": "APPLE iPhone XR",
+     "name": "APPLE iPhone X",
      "color":"Yellow",
      "ROM": 128,
      "price": 999,
@@ -66,7 +66,7 @@
    },
    {
      "id": 5,
-     "name": "APPLE iPhone 11",
+     "name": "APPLE iPhone 14",
      "color":"Red",
      "ROM": 128,
      "price": 990,
@@ -79,7 +79,7 @@
    },
    {
      "id": 6,
-     "name": "APPLE iPhone SE",
+     "name": "APPLE iPhone 13",
      "color":"White",
      "ROM": 64,
      "price": 780,

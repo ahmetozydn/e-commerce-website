@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
 
     <style>
         body {
@@ -14,7 +15,8 @@
             margin-right: 200px;
 
         }
-        body.dark-mode{
+
+        body.dark-mode {
             color: white;
             background-color: #000;
         }
@@ -31,11 +33,31 @@
             margin-left: 10px;
             /* Adjust this value as needed */
         }
+
+        button {
+            background-color: rgb(236, 130, 8);
+            color: white;
+            border-color: rgb(236, 130, 8);
+            scale: 1.5;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            box-shadow: none;
+            border-radius: 4px;
+            height: 28px;
+            width: 100px;
+        }
+
+
+
     </style>
 </head>
 
 <body>
     <div id="navigation-placeholder"></div>
+
+
+
 
     <div class="main-container">
         <img id="product-image"
@@ -44,10 +66,14 @@
         <div class="description">
             <h3 id="product-name">Image Title</h3>
             <p id="product-description">Image description goes here.</p>
+            <button id="addToCartButton">Add to Chart</button>
         </div>
+
     </div>
+
     <div id="footer-placeholder"></div>
-    <script>
+    <script type="module">
+
         const prefersDarkMode = localStorage.getItem('dark-mode-preference');
         if (prefersDarkMode === 'dark') {
             document.body.classList.add('dark-mode');
@@ -60,6 +86,17 @@
             .then(data => {
                 // Insert the navigation code into the placeholder div
                 document.getElementById('navigation-placeholder').innerHTML = data;
+                const parentContainer = document.getElementById('navigation-placeholder');
+      parentContainer.addEventListener('click', function(event) {
+        // Check if the clicked element matches the desired selector
+        if (event.target.matches('.button__badge')) {
+          // Handle the event for the dynamically created element
+          window.location.href = './cart.html'
+        }
+      });
+  
+
+
             });
 
         fetch('./footer.html')
@@ -79,6 +116,7 @@
         const productDetails = document.getElementById('product-name');
         const productDescription = document.getElementById('product-description');
         const productImage = document.getElementById('product-image');
+        let idOfProduct = -1;
         fetch('./data/products.json')
             .then(response => response.json())
             .then(data => {
@@ -87,11 +125,95 @@
                         productDetails.innerText = productName;
                         productDescription.innerText = data[key].Description;
                         productImage.src = data[key].productImage;
+                        idOfProduct = data[key].id;
+                        //console.log(idOfProduct);
                     }
                 }
             });
+        const addToCart = document.getElementById('addToCartButton');
 
+        addToCart.addEventListener('click', function () {
+            let isInclude = false;
+            const jsonArray = JSON.parse(localStorage.getItem('IDs'));
+/*             jsonArray.length = 0;
+
+localStorage.setItem('IDs', JSON.stringify(jsonArray)); */
+            //const element = jsonArray[i];
+            if (!jsonArray.includes(idOfProduct)) {
+                addID(idOfProduct)
+            } else {
+                console.log("already includes" + jsonArray)
+            }
+        });
+
+        // Retrieve the stored IDs from local storage
+        function getIDsFromLocalStorage() {
+            const storedIDs = localStorage.getItem('IDs');
+
+            return storedIDs ? JSON.parse(storedIDs) : [];
+        }
+
+        // Save the IDs to local storage
+        function saveIDsToLocalStorage(IDs) {
+            const IDsString = JSON.stringify(IDs);
+            localStorage.setItem('IDs', IDsString);
+        }
+
+        // Add an ID to the list and update local storage
+        function addID(id) {
+            //clearIDList();
+
+            const IDs = getIDsFromLocalStorage();
+            /*             console.log(IDs)
+                        var isInclude = false;
+                        list.forEach(element => {
+                            if (element == id) {
+                                isInclude = true;
+                                return;
+                            }
+                        });
+                        if (isInclude) {
+                            return;
+                        } */
+
+
+            //if (isIDNotStored(id)) { return; }
+            IDs.push(id);
+            saveIDsToLocalStorage(IDs);
+           // console.log(IDs)
+        }
+
+        function isIDNotStored(id) {
+            const storedIDs = localStorage.getItem('IDs');
+            if (storedIDs) {
+                const parsedIDs = JSON.parse(storedIDs);
+                return !parsedIDs.includes(id);
+            }
+            return true;
+        }
+
+        // Remove an ID from the list and update local storage
+        function removeID(id) {
+            const storedIDs = localStorage.getItem('IDs');
+            const index = IDs.indexOf(id);
+            if (index !== -1) {
+                IDs.splice(index, 1);
+                saveIDsToLocalStorage(IDs);
+            }
+        }
+        function clearIDList() {
+            localStorage.removeItem('IDs');
+        }
+
+     const numberOfCart = document.getElementsByClassName('button__badge');
+        numOfProductCart();
+         function numOfProductCart(){
+            const jsonArray = JSON.parse(localStorage.getItem('IDs'));
+            console.log(jsonArray.length);
+            numberOfCart.innerHTML =  "4";
+        } 
         
+
 
     </script>
 </body>

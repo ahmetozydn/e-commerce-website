@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body{
+            margin-right: 200px;
+            margin-left: 200px;
+        }
+        .card {
+            display: flex;
+            align-items: center;
+            width: 800px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #ffffff;
+        }
+        .card:hover{
+            border: 1px solid #f79604;
+            }
+
+        .card-image {
+            width: 150px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .card-content {
+            flex-grow: 1;
+        }
+
+        .card-title {
+            margin-top: 0;
+        }
+
+        .card-description {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: #fb9c05;">Cart</h1>
+    <div id="container"> </div>
+</body>
+<script>
+
+    const container = document.getElementById('container');
+
+    fetch('./data/products.json')
+        .then(response => response.json())
+        .then(data => {
+            const jsonArray = JSON.parse(localStorage.getItem('IDs'));
+
+            jsonArray.forEach(element => {
+                for (let key in data) {
+                    if (data[key].id == element) {
+                        let element = `<div class="card">
+        <img src="${data[key].productImage}" alt="Card Image" class="card-image">
+        <div class="card-content">
+          <h2 class="card-title" id = "name">${data[key].name}</h2>
+          <p class="card-description">Card description goes here.</p>
+        </div>
+      </div>`
+                        container.innerHTML += element;
+                    }
+                }
+            });
+
+        });
+
+</script>
+
+</html>
