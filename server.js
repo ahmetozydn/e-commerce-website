@@ -1,58 +1,43 @@
+const http = require('http');
+const url = require('url');
+const fs = require('fs');
+const { json } = require('express');
+const dataFilePath = './data/products.json';
+const server = http.createServer((req, res) => {
+  const { pathname } = url.parse(req.url, true);
+  console.log(pathname);
 
-const { json } = require("express");
-const fs = require("fs");
-fs.readFile("./data/products.json", "utf8", (err, jsonString) => {
-  if (err) {
-    console.log("Error reading file from disk:", err);
-    return;
-  }
-  try {
-    const customer = JSON.parse(jsonString);
-    console.log("Customer address is:", customer); // => "Customer address is: Infinity Loop Drive"
+  // Set the response header to indicate JSON content
+  res.setHeader('Content-Type', 'application/json');
 
-    //var jsonString = JSON.stringify(customer); // Convert JSON object to string
+  // Check the requested URL and respond accordingly
+    console.log("hello world");
+    // Read the data from the JSON file
+    fs.readFile(dataFilePath, 'utf8', (err, data) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      //res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+      const jsonData = JSON.parse(data);
+      console.log(jsonData);
+      if (err) {
 
+        res.writeHead(500);
 
-    let output = "";
-
-    customer.forEach(element => {
-      console.log(element.color);
-      var listItem = document.createElement("p");
-      listItem.textContent = element.name; // Replace "propertyName" with the actual property you want to display
-      console.log("DONE!");
-      output += `<p>${element.name}</p> <p>${element.color}</p>`;
+        res.end(JSON.stringify({ message: 'Internal Server Error' }));
+      } else {
+        // Parse the JSON data and return it as a response
+        res.writeHead(200);
+        res.end(data);
+      }
     });
+    // For any other route, return a 404 Not Found response
+/*     res.writeHead(404);
+    console.log("hellooo!")
+    res.end(JSON.stringify({ message: 'Not Found' })); */
+});
 
-    document.querySelector('.data').innerHTML = output;
+const port = 5050;
+const host = 'localhost';
 
-    /* for(let x of customer){
-       console.log(x.color)
-       element.innerHTML = x;
-       placeholder.append(element)
-     }*/
-
-
-    // placeholder.innerHTML = out;
-
-
-  } catch (err) {
-    console.log("Error parsing JSON string:", err);
-
-  }
-})
-
-
-/*const fs = require("fs");
-   
-// Read users.json file
-fs.readFile("./data/products.json", function(err, data) {
-      
-    // Check for errors
-    if (err) throw err;
-   
-    // Converting to JSON
-    const products = JSON.parse(data);
-      
-    console.log(products); // Print users 
-
-}); */
+server.listen(port, () => {
+  console.log(`Server running on http://${host}:${port}/api`);
+});

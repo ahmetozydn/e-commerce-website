@@ -25,9 +25,6 @@
             box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         }
 
-        .card:hover {
-            border: 1px solid #f79604;
-        }
 
         .card-image {
             width: 150px;
@@ -105,7 +102,12 @@
 
         #empty-list-message {
             text-align: center;
+            position: fixed;
             padding: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
         }
 
         .empty-icon {
@@ -122,6 +124,26 @@
             transform: scale(1.2);
         }
 
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        #closeAlertButton {
+            background-color: #ebe6df;
+            border-radius: 4px;
+            margin: 20px;
+            scale: 1.2;
+        }
+
+        #deleteAlertButton {
+            background-color: #c43829;
+            color: #ebe6df;
+            border-radius: 4px;
+            margin: 20px;
+            scale: 1.2;
+        }
+
         /* Optional styles to make it look better */
     </style>
 </head>
@@ -135,18 +157,21 @@
     <!-- The custom alert overlay -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="alert-box">
-            <p>Are you sure you want to remove the item from cart</p>
-            <button id="closeAlertButton">DELETE</button>
-            <button id="deleteAlertButton">CANCEL</button>
+            <h4>Are you sure you want to delete the product?
+            </h4>
+            <div class="button-container">
+                <button id="closeAlertButton">CANCEL</button>
+                <button id="deleteAlertButton">DELETE</button>
+            </div>
         </div>
     </div>
     <div id="empty-list-message" style="display: none;">
         <i class="empty-icon">📋</i>
-        <p>List is empty</p>
+        <p>No product in shopping cart!</p>
     </div>
 </body>
 <script>
-
+    let item;
     const container = document.getElementById('container');
 
     fetch('./data/products.json')
@@ -203,22 +228,32 @@
 
 
     function deleteItem() {
-
         const clickedElement = event.target;
+        console.log(clickedElement);
+        item = clickedElement.closest('.card'); // suggest better suggestion
+        if (item) {
+            showAlert();
+        }
+        /* const clickedElement = event.target;
         const cardElement = clickedElement.closest('.card'); // suggest better suggestion
         if (cardElement) {
             var idOfProduct = cardElement.id;
             removeID(idOfProduct);
             cardElement.remove();
             checkListEmpty();
-            //handleAlertButtonClick();
-            showAlert();
-            //handleDeleteAlertButtonClick(handleAlertButtonClick)
-        }
-        //const cardElement = clickedElement.closest('.card');
+            
+        } */
     }
-    function generateUniqueId() {
-        return Date.now().toString();
+
+
+    function removeItem() {
+        if (item) {
+            var idOfProduct = item.id;
+            removeID(idOfProduct);
+            item.remove();
+            hideAlert();
+            checkListEmpty();
+        }
     }
 
     function showAlert() {
@@ -236,8 +271,8 @@
     function handleCloseAlertButtonClick() {
         hideAlert();
     }
-    function handleDeleteAlertButtonClick(callBackFunction) {
-        callBackFunction("DELETE");
+    function handleDeleteAlertButtonClick() {
+        removeItem();
     }
 
 
@@ -296,6 +331,7 @@
             emptyListMessage.style.display = 'none';
         }
     }
+
 
 </script>
 
