@@ -6,21 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
     <style>
         body {
             margin-right: 200px;
             margin-left: 200px;
         }
+        .main-container{
+            overflow: hidden;
+        }
+        .container{
+            width: 800px;
+            float: left;
+            
+        }
 
         .card {
             display: flex;
             position: relative;
-
             align-items: center;
             width: 800px;
             border-radius: 4px;
             padding: 10px;
             margin: 20px;
+            float: left;
+
             background-color: #ffffff;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         }
@@ -144,15 +154,58 @@
             scale: 1.2;
         }
 
+        .order-summary {
+            border: 2px solid #c43829;
+            float: left;
+            border-radius: 8px;
+            padding: 60px;
+            margin: 20px;
+            width: 400px;
+        }
+
+        h2 {
+            color: orange;
+            text-align: center;
+        }
+
+        #purchase-button {
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: darkorange;
+        }
+
+        #item-count,
+        #total-price {
+            font-weight: bold;
+        }
+
         /* Optional styles to make it look better */
     </style>
 </head>
 
 <body>
     <h1 style="color: #fb9c05;">Cart</h1>
-    <div id="container"> </div>
+    <div class="main-container">
+        <div id="container"> </div>
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <p>Number of items: <span id="item-count">3</span></p>
+            <button id="purchase-button">Purchase</button>
+            <p>Total Price: $<span id="total-price">50.00</span></p>
+        </div>
 
+    </div>
 
+ 
 
     <!-- The custom alert overlay -->
     <div class="modal-overlay" id="modalOverlay">
@@ -166,9 +219,16 @@
         </div>
     </div>
     <div id="empty-list-message" style="display: none;">
-        <i class="empty-icon">📋</i>
-        <p>No product in shopping cart!</p>
+        <img src="https://codescandy.com/coach/rtl/assets/images/bag.svg" alt="Imgur Image">
+
+        <h3>Your cart is currently empty</h3>
+        <p>Before proceed to checkout you must add some products to your shopping cart. You will find <br> a lot of
+            interesting products on our "Shop" page.</p>
+        <button onclick="openHome()"
+            style=" color: white; background-color: #fb9c05; width: 150px; height: 48px; font-size: medium;">Start
+            Shopping</button>
     </div>
+
 </body>
 <script>
     let item;
@@ -331,7 +391,9 @@
             emptyListMessage.style.display = 'none';
         }
     }
-
+    function openHome() {
+        window.location.href = "./main.html";
+    }
 
 </script>
 

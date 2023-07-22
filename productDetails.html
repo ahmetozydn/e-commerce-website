@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail Page</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
 
     <style>
         body {
@@ -29,27 +32,96 @@
             min-height: 100vh;
         }
 
+        .main-content {
+            display: flex;
+        }
+
         .description {
-            margin-left: 10px;
+            margin-left: 60px;
             /* Adjust this value as needed */
+            flex: 1;
         }
 
         button {
             background-color: rgb(236, 130, 8);
             color: white;
             border-color: rgb(236, 130, 8);
-            scale: 1.5;
             border: none;
             cursor: pointer;
             outline: none;
             box-shadow: none;
             border-radius: 4px;
-            height: 28px;
-            width: 100px;
+            font-size: 16px;
+            height: 36px;
+            width: 128px;
+        }
+
+        .button-added {
+            color: #ffffff;
+            background-color: rgb(42, 96, 2);
+        }
+
+        .image-container {
+            position: relative;
+
+        }
+
+        #product-image {
+            height: 450px;
+            width: 450px;
+            border-radius: 8px;
+            display: none;
         }
 
 
+        .shimmer-effect {
+            height: 450px;
+            width: 450px;
+            border-radius: 8px;
+        }
 
+        article {
+            background: #ddd;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+
+        article .line {
+            width: 100%;
+            height: 20px;
+            background: #bbb;
+            margin: 60px 0;
+            border-radius: 5px;
+        }
+
+        article .shimmer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+
+            background: linear-gradient(100deg,
+                    rgba(255, 255, 255, 0) 20%,
+                    rgba(255, 255, 255, 0.5) 50%,
+                    rgba(255, 255, 255, 0) 80%);
+
+            animation: shimmer 1s infinite linear;
+        }
+
+        @keyframes shimmer {
+            from {
+                transform: translateX(10%);
+            }
+
+            to {
+                transform: translateX(70%);
+            }
+        }
     </style>
 </head>
 
@@ -60,16 +132,37 @@
 
 
     <div class="main-container">
-        <img id="product-image"
-            src="https://media.istockphoto.com/id/1093110112/photo/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-of-green-forest-with-pure.jpg?s=612x612&w=0&k=20&c=lpQ1sQI49bYbTp9WQ_EfVltAqSP1DXg0Ia7APTjjxz4="
-            alt="Image">
+        <div class="main-content">
+            <div class="image-container">
+                <div class="shimmer-effect">
+                    <article>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="shimmer"></div>
+                    </article>
+                </div>
+                <img id="product-image" src="" alt="Product Image">
+            </div>
+        </div>
         <div class="description">
-            <h3 id="product-name">Image Title</h3>
-            <p id="product-description">Image description goes here.</p>
-            <button id="addToCartButton">Add to Chart</button>
+            <h3 id="product-name"></h3>
+            <p id="product-price"></p>
+            <h4 style="color: #e58f32;">Description</h4>
+            <p id="product-description"></p>
+            <button id="addToCartButton"><!-- <i id="shopping-icon" class="fa-solid fa-bag-shopping"
+                    style="margin-right: 10px ; color: #ffffff; scale: 1.2; display: none;"></i> -->Add to
+                Cart</button>
         </div>
 
+
     </div>
+
+
+
+
+
 
     <div id="footer-placeholder"></div>
     <script type="module">
@@ -87,16 +180,24 @@
                 // Insert the navigation code into the placeholder div
                 document.getElementById('navigation-placeholder').innerHTML = data;
                 const parentContainer = document.getElementById('navigation-placeholder');
-      parentContainer.addEventListener('click', function(event) {
-        // Check if the clicked element matches the desired selector
-        if (event.target.matches('.button__badge')) {
-          // Handle the event for the dynamically created element
-          window.location.href = './cart.html'
-        }
-      });
-  
+                parentContainer.addEventListener('click', function (event) {
+                    // Check if the clicked element matches the desired selector
+                    if (event.target.matches('.button__badge')) {
+                        // Handle the event for the dynamically created element
+                        window.location.href = './cart.html'
+                    }
+                });
+                const jsonArray = JSON.parse(localStorage.getItem('IDs'));
 
+                $('.button__badge').text(jsonArray.length)
+                console.log("navigation here.....  " + jsonArray.lenght)
 
+                $('.website-name').click(function () {
+                    window.location.href = "./main.html";
+                })
+                $('#openCart').click(function () {
+                    window.location.href = "./cart.html"
+                })
             });
 
         fetch('./footer.html')
@@ -116,7 +217,7 @@
         const productDetails = document.getElementById('product-name');
         const productDescription = document.getElementById('product-description');
         const productImage = document.getElementById('product-image');
-        let idOfProduct = -1;
+        var idOfProduct = -1;
         fetch('./data/products.json')
             .then(response => response.json())
             .then(data => {
@@ -125,26 +226,47 @@
                         productDetails.innerText = productName;
                         productDescription.innerText = data[key].Description;
                         productImage.src = data[key].productImage;
+                        $('#product-price').text('$' + data[key].price);
+
+                        productImage.style.display = 'block';
+                        $('.shimmer-effect').hide();
+
                         idOfProduct = data[key].id;
-                        //console.log(idOfProduct);
+                        console.log("idOfProduct here... " + idOfProduct);
                     }
                 }
+                const jsonArray = JSON.parse(localStorage.getItem('IDs'));
+
+                if (jsonArray.includes(idOfProduct)) {
+                    console.log("idOfProduct " + idOfProduct)
+                    const length = jsonArray.length;
+                    console.log(`lenght of array is : ${length} includes  ${jsonArray} is includes? : ${jsonArray.includes(idOfProduct)}`);
+                    console.log(jsonArray);
+                    $('#addToCartButton').addClass('button-added');
+                    //$('#shopping-icon').show();
+                }
             });
-        const addToCart = document.getElementById('addToCartButton');
 
-        addToCart.addEventListener('click', function () {
-            let isInclude = false;
+
+
+        $('#addToCartButton').click(function () {
             const jsonArray = JSON.parse(localStorage.getItem('IDs'));
-/*             jsonArray.length = 0;
-
-localStorage.setItem('IDs', JSON.stringify(jsonArray)); */
-            //const element = jsonArray[i];
             if (!jsonArray.includes(idOfProduct)) {
+                $('#addToCartButton').addClass('button-added');
+                // $('#shopping-icon').hide();
                 addID(idOfProduct)
+                console.log("length of array " + jsonArray.length);
+                $('.button__badge').text(jsonArray.length + 1);
             } else {
+                removeID(idOfProduct);
                 console.log("already includes" + jsonArray)
+                $('#addToCartButton').removeClass('button-added');
+                $('.button__badge').text(jsonArray.length - 1);
+                // $('#shopping-icon').show();
+
             }
         });
+
 
         // Retrieve the stored IDs from local storage
         function getIDsFromLocalStorage() {
@@ -180,7 +302,7 @@ localStorage.setItem('IDs', JSON.stringify(jsonArray)); */
             //if (isIDNotStored(id)) { return; }
             IDs.push(id);
             saveIDsToLocalStorage(IDs);
-           // console.log(IDs)
+            // console.log(IDs)
         }
 
         function isIDNotStored(id) {
@@ -194,25 +316,25 @@ localStorage.setItem('IDs', JSON.stringify(jsonArray)); */
 
         // Remove an ID from the list and update local storage
         function removeID(id) {
-            const storedIDs = localStorage.getItem('IDs');
-            const index = IDs.indexOf(id);
+            const storedIDs = JSON.parse(localStorage.getItem('IDs'));
+            const index = storedIDs.indexOf(id);
             if (index !== -1) {
-                IDs.splice(index, 1);
-                saveIDsToLocalStorage(IDs);
+                storedIDs.splice(index, 1);
+                saveIDsToLocalStorage(storedIDs);
             }
         }
         function clearIDList() {
             localStorage.removeItem('IDs');
         }
 
-     const numberOfCart = document.getElementsByClassName('button__badge');
+        const numberOfCart = document.getElementsByClassName('button__badge');
         numOfProductCart();
-         function numOfProductCart(){
+        function numOfProductCart() {
             const jsonArray = JSON.parse(localStorage.getItem('IDs'));
             console.log(jsonArray.length);
-            numberOfCart.innerHTML =  "4";
-        } 
-        
+            numberOfCart.innerHTML = "4";
+        }
+
 
 
     </script>

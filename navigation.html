@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Header</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <style>
     ul.nav {
@@ -82,7 +83,9 @@ letter-spacing: 0px;
   top: 0;
   right: 0;
 }
-
+.website-name{
+  cursor: pointer;
+}
 
 </style>
 </head>
@@ -101,11 +104,17 @@ letter-spacing: 0px;
 
     <div class="button" id="openCart">
       <i class="fa-solid fa-cart-shopping" style="color: #000; scale: 1.5;"></i>
-      <span class="button__badge" onclick="openCart">0</span>
+      <span class="button__badge" onclick="openCart"></span>
     </div>
     </ul>
  
   </div>
+<script>
+  $('#openCart').click(function(){
+    window.location.href = "./cart.html"
+  })
+  
+</script>
 </body>
 </html>
 
