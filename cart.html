@@ -6,206 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="cart.css">
 
     <style>
-        body {
-            margin-right: 200px;
-            margin-left: 200px;
-        }
-        .main-container{
-            overflow: hidden;
-        }
-        .container{
-            width: 800px;
-            float: left;
-            
-        }
-
-        .card {
-            display: flex;
-            position: relative;
-            align-items: center;
-            width: 800px;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 20px;
-            float: left;
-
-            background-color: #ffffff;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-        }
 
 
-        .card-image {
-            width: 150px;
-            height: auto;
-            margin-right: 10px;
-            border-radius: 4px;
-        }
-
-        .card-content {
-            flex-grow: 1;
-        }
-
-        .card-title {
-            margin-top: 0;
-        }
-
-        .card-description {
-            margin-bottom: 0;
-        }
-
-        .card-icon {
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
-            right: 10px;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            width: 100%;
-            overflow: auto;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        }
-
-        .dropdown.open .dropdown-content {
-            display: block;
-
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            /* Set a higher z-index to ensure the alert appears above other elements */
-        }
-
-        /* CSS for the alert box */
-        .alert-box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Additional styles for buttons (optional) */
-        button {
-            cursor: pointer;
-            margin: 5px;
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            background-color: transparent;
-        }
-
-        #empty-list-message {
-            text-align: center;
-            position: fixed;
-            padding: 20px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-        }
-
-        .empty-icon {
-            font-size: 64px;
-        }
-
-        i {
-            font-size: 24px;
-            transition: transform 0.2s ease-in-out;
-            color: rgb(171, 38, 38);
-        }
-
-        i:hover {
-            transform: scale(1.2);
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        #closeAlertButton {
-            background-color: #ebe6df;
-            border-radius: 4px;
-            margin: 20px;
-            scale: 1.2;
-        }
-
-        #deleteAlertButton {
-            background-color: #c43829;
-            color: #ebe6df;
-            border-radius: 4px;
-            margin: 20px;
-            scale: 1.2;
-        }
-
-        .order-summary {
-            border: 2px solid #c43829;
-            float: left;
-            border-radius: 8px;
-            padding: 60px;
-            margin: 20px;
-            width: 400px;
-        }
-
-        h2 {
-            color: orange;
-            text-align: center;
-        }
-
-        #purchase-button {
-            background-color: orange;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: darkorange;
-        }
-
-        #item-count,
-        #total-price {
-            font-weight: bold;
-        }
-
-        /* Optional styles to make it look better */
+        
     </style>
 </head>
 
 <body>
+    <div id="navigation-placeholder"></div>
+
     <h1 style="color: #fb9c05;">Cart</h1>
     <div class="main-container">
         <div id="container"> </div>
         <div class="order-summary">
             <h2>Order Summary</h2>
-            <p>Number of items: <span id="item-count">3</span></p>
+            <p>Number of items: <span id="item-count"></span></p>
             <button id="purchase-button">Purchase</button>
-            <p>Total Price: $<span id="total-price">50.00</span></p>
+            <p>Total Price: $<span id="total-price">0</span></p>
         </div>
 
     </div>
 
- 
 
     <!-- The custom alert overlay -->
     <div class="modal-overlay" id="modalOverlay">
@@ -219,7 +44,7 @@
         </div>
     </div>
     <div id="empty-list-message" style="display: none;">
-        <img src="https://codescandy.com/coach/rtl/assets/images/bag.svg" alt="Imgur Image">
+        <img src="https://codescandy.com/coach/rtl/assets/images/bag.svg" alt="There is no Product">
 
         <h3>Your cart is currently empty</h3>
         <p>Before proceed to checkout you must add some products to your shopping cart. You will find <br> a lot of
@@ -228,173 +53,9 @@
             style=" color: white; background-color: #fb9c05; width: 150px; height: 48px; font-size: medium;">Start
             Shopping</button>
     </div>
-
+    <div id="footer-placeholder"></div>
 </body>
-<script>
-    let item;
-    const container = document.getElementById('container');
+ <script src="cart.js"></script>
 
-    fetch('./data/products.json')
-        .then(response => response.json())
-        .then(data => {
-            const jsonArray = JSON.parse(localStorage.getItem('IDs'));
-
-            jsonArray.forEach(element => {
-                for (let key in data) {
-                    if (data[key].id == element) {
-                        let element = `<div class="card" id = "${data[key].id}">
-        <img src="${data[key].productImage}" alt="Card Image" class="card-image">
-        <div class="card-content>
-          <h2 class="card-title" id = "name">${data[key].name}</h2>
-          <p class="card-description">Card description goes here.</p>
-
-        </div>
-        <span class="card-icon">
-            <button id = "menu" onClick = "deleteItem()">
-                <i class="fa-solid fa-trash" style = "scale = 1.3;"></i>
-</button>
-  </span>
-      </div>`
-                        container.innerHTML += element;
-                    }
-                }
-
-            });
-            checkListEmpty();
-
-        });
-
-
-    /*     function handleCardClick(event) {
-            const clickedElement = event.target;
-            const cardElement = clickedElement.closest('.card');
-            if (cardElement) {
-                var idOfProduct = cardElement.id;
-                console.log("id of card:" + idOfProduct);
-                removeID(idOfProduct);
-                cardElement.remove();
-                checkListEmpty();
-                const storedIDs = JSON.parse(localStorage.getItem('IDs'));
-                console.log(storedIDs)
-            }
-            if (clickedElement.classList.contains('card')) {
-                console.log('Card clicked:', clickedElement.textContent);
-            } else {
-                console.log('Another element inside the parent container was clicked.');
-            }
-        }
-        const cardListContainer = document.getElementById('container');
-        cardListContainer.addEventListener('click', handleCardClick); */
-
-
-    function deleteItem() {
-        const clickedElement = event.target;
-        console.log(clickedElement);
-        item = clickedElement.closest('.card'); // suggest better suggestion
-        if (item) {
-            showAlert();
-        }
-        /* const clickedElement = event.target;
-        const cardElement = clickedElement.closest('.card'); // suggest better suggestion
-        if (cardElement) {
-            var idOfProduct = cardElement.id;
-            removeID(idOfProduct);
-            cardElement.remove();
-            checkListEmpty();
-            
-        } */
-    }
-
-
-    function removeItem() {
-        if (item) {
-            var idOfProduct = item.id;
-            removeID(idOfProduct);
-            item.remove();
-            hideAlert();
-            checkListEmpty();
-        }
-    }
-
-    function showAlert() {
-        const modalOverlay = document.getElementById('modalOverlay');
-        modalOverlay.style.display = 'block';
-    }
-
-    // Function to hide the custom alert
-    function hideAlert() {
-        const modalOverlay = document.getElementById('modalOverlay');
-        modalOverlay.style.display = 'none';
-    }
-
-    // Event handler for the click event on the close button in the alert
-    function handleCloseAlertButtonClick() {
-        hideAlert();
-    }
-    function handleDeleteAlertButtonClick() {
-        removeItem();
-    }
-
-
-    // Get the close button in the alert by its ID
-    const closeAlertButton = document.getElementById('closeAlertButton');
-
-    // Add the click event listener to the close button in the alert
-    closeAlertButton.addEventListener('click', handleCloseAlertButtonClick);
-
-
-    const deleteAlertButton = document.getElementById('deleteAlertButton');
-    deleteAlertButton.addEventListener('click', handleDeleteAlertButtonClick);
-
-    function removeID(id) {
-        const storedIDs = JSON.parse(localStorage.getItem('IDs'));
-        console.log(typeof (storedIDs));
-        console.log(storedIDs);
-        const index = storedIDs.indexOf(id);
-        console.log(storedIDs.indexOf(id))
-        console.log(id);
-        const newArray = storedIDs.filter((element) => element !== id);
-        console.log(newArray);
-
-        storedIDs.forEach(element => {
-            console.log("hellooo" + element);
-            console.log("the id is :" + id)
-            console.log("the element is :" + element)
-            if (element == id) {
-                console.log("the array")
-                const newArray = storedIDs.filter((element) => element !== id);
-                storedIDs.splice(storedIDs.indexOf(element), 1);
-                saveIDsToLocalStorage(storedIDs);
-            }
-        });
-        if (index !== -1) {
-            storedIDs.splice(index, 1);
-            console.log("new array " + storedIDs)
-            saveIDsToLocalStorage(storedIDs);
-        }
-    }
-    function saveIDsToLocalStorage(IDs) {
-        const IDsString = JSON.stringify(IDs);
-        localStorage.setItem('IDs', IDsString);
-    }
-
-    const listContainer = document.getElementById('container');
-    const emptyListMessage = document.getElementById('empty-list-message');
-
-    function checkListEmpty() {
-        console.log(listContainer.childElementCount + "hello");
-        if (listContainer.childElementCount === 0) {
-            emptyListMessage.style.display = 'block';
-
-
-        } else {
-            emptyListMessage.style.display = 'none';
-        }
-    }
-    function openHome() {
-        window.location.href = "./main.html";
-    }
-
-</script>
 
 </html>

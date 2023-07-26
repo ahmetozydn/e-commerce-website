@@ -16,14 +16,12 @@
             color: #000;
             margin-left: 200px;
             margin-right: 200px;
-
         }
 
         body.dark-mode {
             color: white;
             background-color: #000;
         }
-
         .main-container {
             margin-left: 200px;
             margin-right: 200px;
@@ -34,6 +32,8 @@
 
         .main-content {
             display: flex;
+            height: 450px;
+            width: 450px;
         }
 
         .description {
@@ -284,7 +284,6 @@
         // Add an ID to the list and update local storage
         function addID(id) {
             //clearIDList();
-
             const IDs = getIDsFromLocalStorage();
             /*             console.log(IDs)
                         var isInclude = false;
