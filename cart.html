@@ -4,35 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+    <title>Shopping Cart Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="cart.css">
-
-    <style>
-
-
-        
-    </style>
 </head>
 
 <body>
     <div id="navigation-placeholder"></div>
 
-    <h1 style="color: #fb9c05;">Cart</h1>
     <div class="main-container">
+        <h1 style="color: #fb9c05;">Cart</h1>
+
         <div id="container"> </div>
         <div class="order-summary">
             <h2>Order Summary</h2>
             <p>Number of items: <span id="item-count"></span></p>
-            <button id="purchase-button">Purchase</button>
             <p>Total Price: $<span id="total-price">0</span></p>
+            <button id="purchase-button">Purchase</button>
         </div>
-
     </div>
 
-
-    <!-- The custom alert overlay -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="alert-box">
             <h4>Are you sure you want to delete the product?
@@ -43,9 +35,9 @@
             </div>
         </div>
     </div>
+
     <div id="empty-list-message" style="display: none;">
         <img src="https://codescandy.com/coach/rtl/assets/images/bag.svg" alt="There is no Product">
-
         <h3>Your cart is currently empty</h3>
         <p>Before proceed to checkout you must add some products to your shopping cart. You will find <br> a lot of
             interesting products on our "Shop" page.</p>
@@ -55,7 +47,5 @@
     </div>
     <div id="footer-placeholder"></div>
 </body>
- <script src="cart.js"></script>
-
-
+<script src="cart.js"></script>
 </html>

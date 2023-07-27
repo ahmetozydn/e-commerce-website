@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Header</title>
+  <title>Header of the Website</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -14,7 +14,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
 }
 
 ul.nav li {
@@ -40,7 +40,9 @@ width: 100% !important;
 height: 30% !important;
 padding: 0 0 100 10 !important;
 margin: 0 0 100 10 !important;
-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+z-index: 1  !important;
+position: relative;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 .icon {
   cursor: pointer;
@@ -87,20 +89,48 @@ letter-spacing: 0px;
   cursor: pointer;
 }
 
+#search-input{
+  border-radius: 4px;
+  margin: 0px;
+  font-size: 16px;
+  width: 300px;
+  height: 40px;
+  padding-left: 16px;
+}
+#search-button{
+  border-radius: 4px;
+  margin: 0px;
+  color: #f0900a;
+  height: 40px;
+  width: 60px;
+  padding: 0px;
+  cursor: pointer;
+}
+.input-group{
+  padding: 0px;
+  height: 40px;
+  margin: 0px;
+  margin-left: 20px;
+}
+
 </style>
 </head>
 <body>
   <div class="no-padding">
     <ul class="nav" style="padding: 20px; margin: 0;">
 
-      <span class="website-name"><h2 style="display: inline; color: #f0900a;">Shopie</h2></span> <!-- Website Name -->
+      <span class="website-name"><h2 style="display: inline; color: #f0900a;">Shopie</h2></span>
       <a class="no-strike" href="demo.html">Home</a>
       <a class="no-strike" href="electronic.html">Electronic</a>
       <a class="no-strike" href="productDetails.html">Clothing</a>
       <a class="no-strike" href="#">Sport</a>
       <a class="no-strike" href="#">Home&Decoration</a>
       <a class="no-strike" href="temp.html">.temp</a>
-      <i class="fa-regular fa-lightbulb custom-cursor" onclick="changeContent(this)" style="transform: scale(1.5);"></i>
+      <div class="input-group" style="display: inline;">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id = "search-input" />
+        <button type="button" class="btn btn-outline-primary" id = "search-button">search</button>
+      </div>
+     <!--  <i class="fa-regular fa-lightbulb custom-cursor" onclick="changeContent(this)" style="transform: scale(1.5);"></i> -->
 
     <div class="button" id="openCart">
       <i class="fa-solid fa-cart-shopping" style="color: #000; scale: 1.5;"></i>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed Successfully Page</title>
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {}
+
+        #orderContainer {
+            min-height: 80vh;
+            margin-left: 200px;
+            margin-right: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navigation-placeholder"></div>
+<br>
+
+    <div id="orderContainer">
+           <!--  <i style = "scale: 6; color: rgb(213, 126, 13);" class = "fa-regular fa-circle-check display:inline-block" ></i> -->
+            <h1 style= "display: block;"> Order Placed Successfully! </h1>
+    </div>
+    <div id="footer-placeholder"></div>
+
+</body>
+<script>
+
+    let array = [];
+    let emptyJSON = JSON.stringify(array);
+    localStorage.setItem('IDs', emptyJSON);
+    fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            // Insert the navigation code into the placeholder div
+            document.getElementById('navigation-placeholder').innerHTML = data;
+            const parentContainer = document.getElementById('navigation-placeholder');
+            parentContainer.addEventListener('click', function (event) {
+                // Check if the clicked element matches the desired selector
+                if (event.target.matches('.button__badge')) {
+                    // Handle the event for the dynamically created element
+                    window.location.href = './cart.html'
+                }
+            });
+            const jsonArray = JSON.parse(localStorage.getItem('IDs'));
+
+            $('.button__badge').text(jsonArray.length)
+            console.log("navigation here.....  " + jsonArray.lenght)
+
+            $('.website-name').click(function () {
+                window.location.href = "./home.html";
+            })
+            $('#openCart').click(function () {
+                window.location.href = "./cart.html"
+            })
+            $('#openCart').hide()
+        });
+
+    fetch('./footer.html')
+        .then(response => response.text())
+        .then(data => {
+            // Insert the navigation code into the placeholder div
+            document.getElementById('footer-placeholder').innerHTML = data;
+        });
+
+
+</script>
+
+</html>

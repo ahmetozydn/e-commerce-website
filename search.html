@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Result Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background-color: rgb(252, 248, 243);
+        }
+
+        .main-content {
+            margin-top: 0px;
+            padding: 0px;
+            margin-left: 0px;
+            margin-right: 300px;
+            margin-left: 300px;
+            min-height: 80vh;
+            background-color: white;
+            display: inline-block;
+        }
+
+        .card {
+            display: flex;
+            cursor: pointer;
+            float: left;
+            position: relative;
+            align-items: center;
+            width: 600px;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 20px;
+            float: left;
+            height: 200px;
+            background-color: #ffffff;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+
+        .card-image {
+            width: 150px;
+            height: auto;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .card-content {
+            flex-grow: 1;
+        }
+
+        .card-title {
+            margin-top: 0;
+        }
+
+        .card-description {
+            margin-bottom: 0;
+        }
+
+        .card-price {
+            color: #6bd770;
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navigation-placeholder"></div>
+
+    <div class="main-content">
+        <div class="empty-result" style="display: flex; height: 80vh;
+        margin: 0; 
+        width:  70vw;
+        justify-content: center !important;
+        align-items: center !important; ">
+            <svg width="116" height="116" viewBox="0 0 116 116" class="no-result-view-mhNQ0So_1yQBovJh1NWl"
+                color="#484848">
+                <g transform="translate(0 -2)" fill="none" fill-rule="evenodd">
+                    <circle fill="#FF6000" opacity="0.08" cx="54" cy="64" r="54"></circle>
+                    <path
+                        d="M49.78 110.844C26.346 106.328 7.936 86.57 6.195 61.673 4.118 31.973 26.552 6.209 56.303 4.129c29.75-2.08 55.552 20.31 57.629 50.01a53.596 53.596 0 01-7.415 31.251"
+                        stroke="#FF6000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path
+                        d="M71.807 80.368c-3.727 2.436-8.702 5.104-14.891 5.104C44.26 85.472 34 75.292 34 62.736 34 50.179 44.26 40 56.916 40s22.389 10.19 22.916 22.736c.295 7.007-3.115 11.829-5.485 15.408l-2.54 2.224zM56.916 43.19c-10.88 0-19.7 8.75-19.7 19.545 0 10.795 8.82 19.545 19.7 19.545 10.88 0 19.7-8.75 19.7-19.545 0-10.795-8.82-19.545-19.7-19.545z"
+                        fill="#FFF"></path>
+                    <path
+                        d="M89 88.582l-9.98-9.98C74.384 81.656 68.197 85 60.5 85 44.76 85 32 72.24 32 56.5S44.76 28 60.5 28 88.344 40.774 89 56.5c.366 8.783-3.874 14.828-6.822 19.315l9.98 9.98c2.266 2.266-.892 5.053-3.158 2.787zM60.5 32C46.968 32 36 42.968 36 56.5S46.968 81 60.5 81 85 70.032 85 56.5 74.032 32 60.5 32z"
+                        fill="#FF6000"></path>
+                    <path
+                        d="M60.5 61a3.5 3.5 0 013.5 3.5c0 1.933-1.567 1.5-3.5 1.5s-3.5.433-3.5-1.5a3.5 3.5 0 013.5-3.5zM67.358 53l1.357 1.358a.96.96 0 01-1.357 1.357L66 54.358l-1.358 1.357a.96.96 0 01-1.357-1.357L64.642 53l-1.357-1.358a.96.96 0 011.357-1.357L66 51.642l1.358-1.357a.96.96 0 011.357 1.357L67.358 53zm-9.643 2.715a.959.959 0 01-1.357 0L55 54.358l-1.358 1.357a.96.96 0 01-1.357-1.357L53.642 53l-1.357-1.358a.96.96 0 011.357-1.357L55 51.642l1.358-1.357a.96.96 0 011.357 1.357L56.358 53l1.357 1.358a.959.959 0 010 1.357z"
+                        fill="#FF6000"></path>
+                </g>
+            </svg>
+
+            <h1 style="text-align: center; margin: 10px;">No Result Found!</h1>
+        </div>
+        <div class="container">
+            <h1 style="margin-top: 2px; padding: 20px;">Search Result</h1>
+            <div class="content-container"></div>
+        </div>
+    </div>
+    <div id="footer-placeholder"></div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', fetchData);
+    fetch('navigation.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navigation-placeholder').innerHTML = data;
+            const parentContainer = document.getElementById('navigation-placeholder');
+            parentContainer.addEventListener('click', function (event) {
+                if (event.target.matches('.button__badge')) {
+                    window.location.href = './cart.html';
+                }
+            });
+            const jsonArray = JSON.parse(localStorage.getItem('IDs'));
+
+            $('.button__badge').text(jsonArray.length)
+
+            $('.website-name').click(function () {
+                window.location.href = "./home.html";
+            })
+            $('#openCart').click(function () {
+                window.location.href = "./cart.html"
+            })
+
+
+            $('#search-button').on('click', function () {
+                if ($('#search-input').val()) {
+                    console.log($('#search-input').val());
+                    searchTerm = $('#search-input').val();
+                    const results = jsonData.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        item.size.toLowerCase().includes(searchTerm.toLowerCase()) || item.color.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        item.camera.toLowerCase().includes(searchTerm.toLowerCase()) || item.Description.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                    console.log(results);
+
+                }
+            });
+            $('#search-button').on('click', function () {
+                if ($('#search-input').val()) {
+                    window.location.href = "./search.html?search=" + $('#search-input').val();
+                }
+            });
+
+        });
+
+    fetch('./footer.html')
+        .then(response => response.text())
+        .then(data => {
+            // Insert the navigation code into the placeholder div
+            document.getElementById('footer-placeholder').innerHTML = data;
+        });
+    const url = window.location.href;
+    const searchParams = url.searchParams;
+    /*           const productName = searchParams.get('name');
+              console.log('URL:', url);
+              console.log('name: ', productName) */
+    const query = new URLSearchParams(window.location.search).get('search');
+
+    var jsonData;
+    async function fetchData() {
+        const apiUrl = 'http://localhost:5050/api';
+
+        try {
+            const response = await fetch(apiUrl);
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+
+            jsonData = await response.json();
+
+
+            const results = jsonData.filter(item => item.name.toLowerCase().includes(query.toLowerCase()) ||
+                item.size.toLowerCase().includes(query.toLowerCase()) || item.color.toLowerCase().includes(query.toLowerCase()) ||
+                item.camera.toLowerCase().includes(query.toLowerCase()) || item.Description.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (results.length == 0) {
+                $('.empty-result').show();
+                $('.container').hide();
+
+            } else {
+                $('.empty-result').hide();
+                console.log("there is a result")
+                results.forEach(element => {
+                    let item = `<div class="card" id = "${element.id}">
+        <img src="${element.productImage}" alt="Card Image" class="card-image">
+        <div class="card-content">
+            <h3 class="card-title" id = "product-name">${element.name} </h3>
+            
+          <p class="card-price">$${element.price}</p>
+
+          <p class="card-description" style = "max-width: 300px; max-height : 60px; overflow: hidden;"> ${element.Description}...</p>
+        </div>
+
+      </div>`
+
+                    $(".content-container").append(item);
+                    $('.card').on('click', function (event) {
+                        const clickedElementId = $(event.target).attr("id"); //$(event.target).hasClass('')
+                        console.log(clickedElementId);
+
+                        //const productId = this.id; should be passed parametre to the link
+                        const children = this.children;
+                        const firstElement = children[1]; // suggest a better approach to find h3 element
+                        const secondElement = firstElement.children;
+                        const targetElement = secondElement[0];
+                        let productName = targetElement.textContent;
+                        var url = 'productDetails.html?name=' + productName;
+                        window.location.href = url;
+                    });
+
+                });
+
+            }
+            console.log(results);
+
+            console.log(jsonData);
+        } catch (error) {
+            console.error('Error fetching data:', error.message);
+        }
+    }
+
+</script>
+
+</html>

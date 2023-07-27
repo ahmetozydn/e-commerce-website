@@ -22,11 +22,17 @@ fetch('navigation.html')
         $('.button__badge').text(jsonArray.length)
 
         $('.website-name').click(function () {
-            window.location.href = "./main.html";
+            window.location.href = "./home.html";
         })
         $('#openCart').click(function () {
             window.location.href = "./cart.html"
         })
+        $('#search-button').on('click', function () {
+
+            if ($('#search-input').val()) {
+            window.location.href = "./search.html?search="+$('#search-input').val();
+            }
+        });
     });
 
 fetch('./footer.html')
@@ -48,7 +54,7 @@ fetch('./data/products.json')
         <img src="${data[key].productImage}" alt="Card Image" class="card-image">
         <div class="card-content">
             <h3 class="card-title" id = "product-name">${data[key].name} </h3>
-        
+            
           <p class="card-price">$${data[key].price}</p>
 
           <p class="card-description" style = "max-width: 300px; max-height : 60px; overflow: hidden;"> ${data[key].Description}...</p>
@@ -57,9 +63,9 @@ fetch('./data/products.json')
           <input type="text" class="quantity" value="1" min="1" readOnly>
           <button class="increase-quantity" onClick = "increaseQuantity()">+</button>
         </div>
-        <span class="card-icon">
-            <button id = "menu" onClick = "deleteItem()">
-                <i class="fa-solid fa-trash" style = "scale = 1.3;"></i>
+        <span class="card-icon" id = "delete-card">
+            <button id = "delete-item" class = "delete">
+                <i id = "delete-icon"class="fa-solid fa-trash" style = "scale = 1.3;"></i>
             </button>
         </span>
       </div>`
@@ -79,72 +85,43 @@ fetch('./data/products.json')
             console.log("Child " + (index + 1) + ": " + $(this).text());
         });
 
+        $('.card').on('click', function (event) {
+            const clickedElementId = $(event.target).attr("id"); //$(event.target).hasClass('')
+            console.log(clickedElementId);
+
+             if (clickedElementId == 'delete-item' || clickedElementId == 'delete-card' || clickedElementId == 'delete-icon') { // suggest a better approach for inner clickable button
+                 console.log('Button inside card clicked');
+                 item = event.target.closest('.card'); // suggest better suggestion
+
+                 deleteItem(event)
+             }else {
+                //const productId = this.id; should be passed parametre to the link
+                const children = this.children;
+                const firstElement = children[1]; // suggest a better approach to find h3 element
+                const secondElement = firstElement.children;
+                const targetElement = secondElement[0];
+                let productName = targetElement.textContent;
+                var url = 'productDetails.html?name=' + productName;
+                window.location.href = url;
+            }
 
 
-        $('.card').on('click', function () {
-            const childElements = this.children;
-            //const nameContent = this.querySelector(".card-content").textContent;
-            const productId = this.id;
-            //const $cardContent = $(this).find('.card-title');
-            //let data = fetchData(productId);
-            const cardContent = $(this).find('.card .card-content');
-            //console.log(cardContent.textContent);
-            const children = this.children;
-            const firstElement = children[1];
-            const secondElement = firstElement.children;
-            const targetElement = secondElement[0];
-            let productName = targetElement.textContent;
-            //console.log(firstElement);
-            /* data.forEach(element =>{
-                if(productId == element.id){
-                    productName = element.name;
-                    return;
-                }
-            }); */
 
-            //let parsedJSON = JSON.parse(data);
-
-            /*  for (let i = 0; i < children.length; i++) {
-                const element = children[i];
-                console.log(element);
-            }       */
-
-            /* for (let i = 0; i < this.length; i++) {
-                const element = children[i];
-                console.log(element);
-            }   */
-            //console.log(another);
-
-            //var url = 'productDetails.html?id=' + encodeURIComponent(productId) + "&name = "+ productName;
-            var url = 'productDetails.html?name='+productName;
-            window.location.href = url;
         });
+        $('delete-item').on('click', function (event) {
+            event.stopPropagation();
+            const clickedElement = event.target;
+            console.log(clickedElement);
+            item = clickedElement.closest('.card'); // suggest better suggestion
+            if (item) {
+                showAlert();
+            }
+        })
+
     });
 
+function deleteItem(event) {
 
-/*     function handleCardClick(event) {
-        const clickedElement = event.target;
-        const cardElement = clickedElement.closest('.card');
-        if (cardElement) {
-            var idOfProduct = cardElement.id;
-            console.log("id of card:" + idOfProduct);
-            removeID(idOfProduct);
-            cardElement.remove();
-            checkListEmpty();
-            const storedIDs = JSON.parse(localStorage.getItem('IDs'));
-            console.log(storedIDs)
-        }
-        if (clickedElement.classList.contains('card')) {
-            console.log('Card clicked:', clickedElement.textContent);
-        } else {
-            console.log('Another element inside the parent container was clicked.');
-        }
-    }
-    const cardListContainer = document.getElementById('container');
-    cardListContainer.addEventListener('click', handleCardClick); */
-
-
-function deleteItem() {
     const clickedElement = event.target;
     console.log(clickedElement);
     item = clickedElement.closest('.card'); // suggest better suggestion
@@ -165,14 +142,14 @@ function deleteItem() {
 
 function removeItem() {
     if (item) {
+        updateSummary(item);
+        console.log("removed item "+item);
         var idOfProduct = item.id;
         removeID(idOfProduct);
         hideAlert();
-        checkListEmpty();
         const parentElement = item.querySelector(".card-content");
-        console.log(parentElement);
         item.remove();
-        //updateSummary(item);
+        checkListEmpty();
     }
 }
 
@@ -181,13 +158,11 @@ function showAlert() {
     modalOverlay.style.display = 'block';
 }
 
-// Function to hide the custom alert
 function hideAlert() {
     const modalOverlay = document.getElementById('modalOverlay');
     modalOverlay.style.display = 'none';
 }
 
-// Event handler for the click event on the close button in the alert
 function handleCloseAlertButtonClick() {
     hideAlert();
 }
@@ -196,10 +171,8 @@ function handleDeleteAlertButtonClick() {
 }
 
 
-// Get the close button in the alert by its ID
 const closeAlertButton = document.getElementById('closeAlertButton');
 
-// Add the click event listener to the close button in the alert
 closeAlertButton.addEventListener('click', handleCloseAlertButtonClick);
 
 
@@ -242,10 +215,13 @@ function checkListEmpty() {
     }
 }
 
-
+$('#purchase-button').on('click' ,
+function (){
+    window.location.href = "./orderPlaced.html";
+});
 
 function openHome() {
-    window.location.href = "./main.html";
+    window.location.href = "./home.html";
 }
 
 function calculateTotalPrice() {
@@ -283,7 +259,20 @@ function calculateTotalPrice() {
 }
 
 function updateSummary(item) {
-    const list = JSON.parse(localStorage.getItem('IDs'))
+    console.log("updateSummary "+item);
+    const itemPrice = $(item).find('card-price');
+    let priceString = item.querySelector('.card-price');
+    const price = priceString.textContent.match(/\d+(\.\d+)?/g);
+    console.log("the price is "+ price[0]);
+    let previousPrice = $('#total-price').text()
+    $('#total-price').text(previousPrice - price[0])
+    let itemCount = $('#item-count').text();
+    console.log("last item count is "+itemCount)
+    let totalItem = parseInt(itemCount);
+    $('#item-count').text(totalItem - 1);
+
+
+/*     const list = JSON.parse(localStorage.getItem('IDs'))
     $('#item-count').text(list.length);
     console.log(typeof (item));
     console.log($('item-count').text())
@@ -297,7 +286,7 @@ function updateSummary(item) {
     console.log(targetElement);
     //console.log(child.textContent);
     $('#total-price').text(parseInt(item.textContent) - itemPrice);
-    console.log("the total count is " + $('#total-price').text());
+    console.log("the total count is " + $('#total-price').text()); */
 
 }
 /* 

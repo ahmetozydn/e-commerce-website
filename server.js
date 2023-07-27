@@ -38,6 +38,9 @@ const server = http.createServer((req, res) => {
 const port = 5050;
 const host = 'localhost';
 
+
+
+
 server.listen(port, () => {
   console.log(`Server running on http://${host}:${port}/api`);
 });

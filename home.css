@@ -28,7 +28,7 @@
     }
 
     body.dark-mode {
-      background-color: #282626;
+      background-color: #ffffff;
     }
 
     .icon {
@@ -101,10 +101,27 @@
       width: 100%;
       max-width: 100%;
       max-height: 100%;
-
-
     }
 
+
+    .scroll-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 8px;
+      background-color: #090909;
+      border: none;
+      cursor: pointer;
+      
+    }
+    
+    .prev-button {
+      left: 0;
+    }
+    
+    .next-button {
+      right: 0;
+    }
     body {
       padding: 0;
       box-sizing: border-box;
@@ -119,7 +136,7 @@
     div {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
-      background-color: gray;
+      background-color: rgb(255, 255, 255);
     }
 
     .no-strike {
@@ -192,12 +209,10 @@
       margin-left: 150px;
       margin-right: 150px;
       min-height: 80vh;
-
-
     }
 
     .main-container::dark-mode {
-      background-color: #000 !important;
+      background-color: #ffffff !important;
       color: #000 !important;
     }
 
@@ -221,6 +236,10 @@
       color: #000;
     }
 
+    #navigation-placeholder{
+      z-index: 1;
+    }
+
     ::selection {
       color: white;
       background-color: #000;
@@ -231,17 +250,14 @@
       overflow-x: auto;
       cursor: grab;
       overflow: hidden;
-      /* hidden scroll-bar */
-
-
+      margin-bottom: 50px;
       #main-card-container:active {
         cursor: grabbing;
       }
-
     }
 
     #main-card-container.dark-mode {
-      background-color: #000;
+      background-color: #ffffff;
       color: #000;
     }
 
@@ -251,11 +267,13 @@
 
     /* Slideshow container */
     .slideshow-container {
-      margin-top: 20px !important;
+      padding: 20px;
       background-color: transparent !important;
       max-width: 1000px;
       position: relative;
       margin: auto;
+      background-color: #fff  !important;
+      color: white;
     }
 
     /* Hide the images by default */
@@ -278,9 +296,9 @@
       transition: 0.6s ease;
       border-radius: 0 3px 3px 0;
       user-select: none;
+      position: fixed
     }
 
-    /* Position the "next button" to the right */
     .next {
       right: 0;
       border-radius: 3px 0 0 3px;
@@ -292,11 +310,6 @@
       background-color: rgba(0, 0, 0, 0.8);
     }
 
-
-
-
-
-    /* The dots/bullets/indicators */
     .dot {
       cursor: pointer;
       height: 15px;

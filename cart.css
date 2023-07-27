@@ -1,15 +1,14 @@
-body {
-    margin-right: 200px;
-    margin-left: 200px;
-}
+
 
 .main-container {
     overflow: hidden;
     min-height: 80vh;
+    margin-right: 200px;
+    margin-left: 200px;
 }
 
 #container {
-    width: 600px;
+    width: 650px;
     float: left;
     display: inline-block;
 }
@@ -49,12 +48,12 @@ body {
     background-color: lightgray;
 }
 
-.card-image {
-    width: 150px;
-    height: auto;
-    margin-right: 10px;
-    border-radius: 4px;
-}
+    .card-image {
+        width: 150px;
+        height: auto;
+        margin-right: 10px;
+        border-radius: 4px;
+    }
 
 .card-content {
     flex-grow: 1;
@@ -171,13 +170,19 @@ i:hover {
     scale: 1.2;
 }
 
+p {
+    text-align: center;
+}
+
 .order-summary {
     border: 2px solid #c43829;
     float: left;
     border-radius: 8px;
-    padding: 60px;
+    padding: 50px;
     margin: 20px;
-    width: 400px;
+    width: 250px;
+    height: 150px;
+    align-items: center;
 }
 
 h2 {
@@ -194,6 +199,9 @@ h2 {
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
+    display: block; 
+    margin: auto;
+
 }
 
 button:hover {
@@ -203,4 +211,12 @@ button:hover {
 #item-count,
 #total-price {
     font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        /* Set the card width to 100% of the screen on smaller devices */
+    }
 }
