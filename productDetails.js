@@ -1,4 +1,4 @@
-
+fetchData();
 const prefersDarkMode = localStorage.getItem('dark-mode-preference');
 if (prefersDarkMode === 'dark') {
     document.body.classList.add('dark-mode');
@@ -18,6 +18,8 @@ fetch('navigation.html')
                 window.location.href = './cart.html'
             }
         });
+
+
         const jsonArray = JSON.parse(localStorage.getItem('IDs'));
 
         $('.button__badge').text(jsonArray.length)
@@ -43,18 +45,23 @@ fetch('./footer.html')
         document.getElementById('footer-placeholder').innerHTML = data;
     });
 
-const url = window.location.href;
+/* const url = window.location.href;
 const searchParams = url.searchParams;
-/*           const productName = searchParams.get('name');
-          console.log('URL:', url);
-          console.log('name: ', productName) */
-const productName = new URLSearchParams(window.location.search).get('name');
-console.log(productName);
+const productName = new URLSearchParams(window.location.search).get('name'); */
+
+
+
+const url = window.location.href; // get the current url
+const searchParams = url.searchParams; // get search parametres
+const productId = new URLSearchParams(window.location.search).get('id'); // get the value of id
+
+
+
 const productDetails = document.getElementById('product-name');
 const productDescription = document.getElementById('product-description');
 const productImage = document.getElementById('product-image');
 var idOfProduct = -1;
-fetch('./data/products.json')
+/* fetch('localhost:5050/api')
     .then(response => response.json())
     .then(data => {
         for (let key in data) {
@@ -82,26 +89,55 @@ fetch('./data/products.json')
             //$('#shopping-icon').show();
         }
     });
+ */
+    async function fetchData() {
+        const apiUrl = 'http://localhost:5050/api'; // url to fetch data
+    
+        try {
+            const response = await fetch(apiUrl);
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            let data = await response.json(); // response as JSON data
+            data.forEach(element => { // search for the product by its id
+                if (element.id == productId) {
+                    productDetails.innerText = element.name; // assign related fields with attributes
+                    productDescription.innerText = element.Description;
+                    productImage.src = element.productImage;
+                    $('#product-price').text('$' + element.price);
+                    productImage.style.display = 'block';
+                    $('.shimmer-effect').hide(); // before the image haven't loaded yet show a shimmer effect
+                    return;
+                }   
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error.message); // an error occured while fetching the data
+        }
+    }
 
 
 
 $('#addToCartButton').click(function () {
-    const jsonArray = JSON.parse(localStorage.getItem('IDs'));
-    if (!jsonArray.includes(idOfProduct)) {
-        $('#addToCartButton').addClass('button-added');
-        // $('#shopping-icon').hide();
-        addID(idOfProduct)
+    // store id of products added to cart in localStorage
+    const jsonArray = JSON.parse(localStorage.getItem('IDs')); 
+    if (!jsonArray.includes(productId)) { // check the product is already added
+        addID(productId);
         console.log("length of array " + jsonArray.length);
-        $('.button__badge').text(jsonArray.length + 1);
+        $('.button__badge').text(jsonArray.length + 1); // increase the badge's number
     } else {
-        removeID(idOfProduct);
-        console.log("already includes" + jsonArray)
-        $('#addToCartButton').removeClass('button-added');
-        $('.button__badge').text(jsonArray.length - 1);
-        // $('#shopping-icon').show();
-
+        removeID(productId);
+        $('.button__badge').text(jsonArray.length - 1); // decrease the badge's number
     }
 });
+
+
+
+$('#addToCartButton').addClass('button-added');
+// $('#shopping-icon').hide();
+
+$('#addToCartButton').removeClass('button-added');
+// $('#shopping-icon').show();
 
 
 // Retrieve the stored IDs from local storage
@@ -162,12 +198,7 @@ function clearIDList() {
     localStorage.removeItem('IDs');
 }
 
-const numberOfCart = document.getElementsByClassName('button__badge');
-numOfProductCart();
-function numOfProductCart() {
-    const jsonArray = JSON.parse(localStorage.getItem('IDs'));
-    console.log(jsonArray.length);
-    numberOfCart.innerHTML = "4";
-}
+
+
 
 

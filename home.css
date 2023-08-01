@@ -59,18 +59,24 @@
 
     .card {
       border: 1px solid #ccc;
+      cursor: pointer;
       border-radius: 5px;
       padding: 20px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       background-color: #fff;
       transition: background-color 0.3s ease;
       width: 100%;
-      overflow-x: auto;
-      white-space: nowrap;
+
       display: inline-block;
       overflow: hidden;
       position: relative;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease;
 
+    }
+
+    .card:hover {
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
     }
 
     .card-content {
@@ -93,35 +99,35 @@
       transform-origin: 0 0;
     }
 
-    .card-content:hover {
-      background-color: lightblue;
-    }
-
     .child-card {
       width: 100%;
       max-width: 100%;
       max-height: 100%;
     }
-
-
     .scroll-button {
       position: absolute;
       top: 50%;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
       transform: translateY(-50%);
       padding: 8px;
-      background-color: #090909;
+      scale: 2;
+      background-color: #e8dfdf;
       border: none;
       cursor: pointer;
-      
+      margin: 20px;
     }
-    
+
+
     .prev-button {
       left: 0;
     }
-    
+
     .next-button {
       right: 0;
     }
+
     body {
       padding: 0;
       box-sizing: border-box;
@@ -236,7 +242,7 @@
       color: #000;
     }
 
-    #navigation-placeholder{
+    #navigation-placeholder {
       z-index: 1;
     }
 
@@ -245,24 +251,40 @@
       background-color: #000;
     }
 
-    #main-card-container {
-      white-space: nowrap;
+    #box {
+      /* white-space: nowrap;
       overflow-x: auto;
       cursor: grab;
       overflow: hidden;
       margin-bottom: 50px;
+      padding: 50px;
       #main-card-container:active {
         cursor: grabbing;
-      }
+      }  */
+      white-space: nowrap;
+      overflow-x: scroll;
+      cursor: grab;
+      overflow: hidden;
+      margin-bottom: 50px;
+      padding: 20px;
     }
 
-    #main-card-container.dark-mode {
-      background-color: #ffffff;
-      color: #000;
+    #main-card-container {
+      scale: 0.9;
+      margin: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+      width: 100%;
+      display: inline-block;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
-
     * {
-      box-sizing: border-box
+      box-sizing: border-box;
     }
 
     /* Slideshow container */
@@ -272,7 +294,7 @@
       max-width: 1000px;
       position: relative;
       margin: auto;
-      background-color: #fff  !important;
+      background-color: #fff !important;
       color: white;
     }
 
@@ -307,7 +329,7 @@
     /* On hover, add a black background color with a little bit see-through */
     .prev:hover,
     .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(213, 45, 45, 0.8);
     }
 
     .dot {

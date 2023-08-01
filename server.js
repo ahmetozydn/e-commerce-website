@@ -1,42 +1,25 @@
-const http = require('http');
-const url = require('url');
+
+const http = require('http'); // a module for HTTP requests and responses
 const fs = require('fs');
-const { json } = require('express');
-const dataFilePath = './data/products.json';
+const dataFilePath = './data/products.json'; // file path that contains JSON data
+const port = 5050; // which port would be used for server
+const host = 'localhost'; // host name
+
 const server = http.createServer((req, res) => {
-  const { pathname } = url.parse(req.url, true);
-  console.log(pathname);
-
-  // Set the response header to indicate JSON content
-  res.setHeader('Content-Type', 'application/json');
-
+  res.setHeader('Content-Type', 'application/json'); // Set the response header to indicate JSON content
   // Check the requested URL and respond accordingly
-    console.log("hello world");
-    // Read the data from the JSON file
-    fs.readFile(dataFilePath, 'utf8', (err, data) => {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      //res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    fs.readFile(dataFilePath, 'utf8', (err, data) => { // Read the data from the JSON file
+      res.setHeader("Access-Control-Allow-Origin", "*"); //res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
       const jsonData = JSON.parse(data);
-      console.log(jsonData);
       if (err) {
-
         res.writeHead(500);
-
         res.end(JSON.stringify({ message: 'Internal Server Error' }));
       } else {
-        // Parse the JSON data and return it as a response
-        res.writeHead(200);
+        res.writeHead(200); // Parse the JSON data and return it as a response
         res.end(data);
       }
     });
-    // For any other route, return a 404 Not Found response
-/*     res.writeHead(404);
-    console.log("hellooo!")
-    res.end(JSON.stringify({ message: 'Not Found' })); */
 });
-
-const port = 5050;
-const host = 'localhost';
 
 
 

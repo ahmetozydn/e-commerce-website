@@ -24,16 +24,15 @@
         }
 
         .card {
-            display: flex;
-            cursor: pointer;
-            float: left;
-            position: relative;
+            display: flex; 
+            cursor: pointer; /* when a card hovered cursor would be a pointer */
+            float: left; /* align items left*/
+            position: relative; 
             align-items: center;
             width: 600px;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 20px;
-            float: left;
+            border-radius: 4px; 
+            padding: 10px; /* it's like inner margin*/
+            margin: 20px; 
             height: 200px;
             background-color: #ffffff;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -111,7 +110,16 @@
 
 </body>
 <script>
+
     document.addEventListener('DOMContentLoaded', fetchData);
+
+    const query = new URLSearchParams(window.location.search).get('search');
+
+
+
+    const url = window.location.href;
+    const searchParams = url.searchParams;
+
     fetch('navigation.html')
         .then(response => response.text())
         .then(data => {
@@ -123,17 +131,15 @@
                 }
             });
             const jsonArray = JSON.parse(localStorage.getItem('IDs'));
-
+            $('#search-input').val(query)
             $('.button__badge').text(jsonArray.length)
-
             $('.website-name').click(function () {
                 window.location.href = "./home.html";
             })
             $('#openCart').click(function () {
                 window.location.href = "./cart.html"
             })
-
-
+            
             $('#search-button').on('click', function () {
                 if ($('#search-input').val()) {
                     console.log($('#search-input').val());
@@ -143,7 +149,6 @@
                         item.camera.toLowerCase().includes(searchTerm.toLowerCase()) || item.Description.toLowerCase().includes(searchTerm.toLowerCase())
                     );
                     console.log(results);
-
                 }
             });
             $('#search-button').on('click', function () {
@@ -153,24 +158,18 @@
             });
 
         });
-
     fetch('./footer.html')
         .then(response => response.text())
         .then(data => {
             // Insert the navigation code into the placeholder div
             document.getElementById('footer-placeholder').innerHTML = data;
         });
-    const url = window.location.href;
-    const searchParams = url.searchParams;
-    /*           const productName = searchParams.get('name');
-              console.log('URL:', url);
-              console.log('name: ', productName) */
-    const query = new URLSearchParams(window.location.search).get('search');
 
+ 
+   
     var jsonData;
     async function fetchData() {
         const apiUrl = 'http://localhost:5050/api';
-
         try {
             const response = await fetch(apiUrl);
 
@@ -178,46 +177,36 @@
                 throw new Error('Network response was not ok.');
             }
 
-            jsonData = await response.json();
-
-
-            const results = jsonData.filter(item => item.name.toLowerCase().includes(query.toLowerCase()) ||
+            jsonData = await response.json(); // fetch data from web service
+            const results = jsonData.filter(item => item.name.toLowerCase().includes(query.toLowerCase()) || // search the query in all data
                 item.size.toLowerCase().includes(query.toLowerCase()) || item.color.toLowerCase().includes(query.toLowerCase()) ||
                 item.camera.toLowerCase().includes(query.toLowerCase()) || item.Description.toLowerCase().includes(query.toLowerCase())
             );
 
             if (results.length == 0) {
-                $('.empty-result').show();
+                $('.empty-result').show(); // if there is no result return an empty list message
                 $('.container').hide();
 
             } else {
                 $('.empty-result').hide();
-                console.log("there is a result")
                 results.forEach(element => {
                     let item = `<div class="card" id = "${element.id}">
         <img src="${element.productImage}" alt="Card Image" class="card-image">
         <div class="card-content">
             <h3 class="card-title" id = "product-name">${element.name} </h3>
-            
           <p class="card-price">$${element.price}</p>
-
           <p class="card-description" style = "max-width: 300px; max-height : 60px; overflow: hidden;"> ${element.Description}...</p>
         </div>
-
       </div>`
 
-                    $(".content-container").append(item);
-                    $('.card').on('click', function (event) {
-                        const clickedElementId = $(event.target).attr("id"); //$(event.target).hasClass('')
-                        console.log(clickedElementId);
+                    $(".content-container").append(item); // append container element with each result product
 
+                    $('.card').on('click', function (event) {
+                        const productId = $(event.target).attr("id"); //$(event.target).hasClass('')
                         //const productId = this.id; should be passed parametre to the link
-                        const children = this.children;
-                        const firstElement = children[1]; // suggest a better approach to find h3 element
-                        const secondElement = firstElement.children;
-                        const targetElement = secondElement[0];
-                        let productName = targetElement.textContent;
-                        var url = 'productDetails.html?name=' + productName;
+                        const card = event.target.closest('.card');
+
+                        var url = 'productDetails.html?id=' + card.id;
                         window.location.href = url;
                     });
 
@@ -231,7 +220,7 @@
             console.error('Error fetching data:', error.message);
         }
     }
-
+   
 </script>
 
 </html>

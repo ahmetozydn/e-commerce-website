@@ -1,6 +1,8 @@
 let item;
 const container = document.getElementById('container');
 
+document.addEventListener('DOMContentLoaded', fetchData);
+
 
 fetch('navigation.html')
     .then(response => response.text())
@@ -41,12 +43,95 @@ fetch('./footer.html')
         // Insert the navigation code into the placeholder div
         document.getElementById('footer-placeholder').innerHTML = data;
     });
+let jsonData;
+    async function fetchData() {
+        const apiUrl = 'http://localhost:5050/api'; // url to fetch data
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            console.log(response);
 
-fetch('./data/products.json')
+
+            jsonData = await response.json(); // JSON data is fetched
+            const jsonArray = JSON.parse(localStorage.getItem('IDs')); // find if of all products in the cart
+            jsonData.forEach(item =>{
+                jsonArray.forEach(element =>{
+                    if(element == item.id){ // id comparison to find details of products
+                        // assign values dynamically with JQuery
+                        let productDetail = `<div class="card" id = "${item.id}"> 
+                        <img src="${item.productImage}" alt="Card Image" class="card-image">
+                        <div class="card-content">
+                            <h3 class="card-title" id = "product-name">${item.name} </h3>
+                          <p class="card-price">$${item.price}</p>
+                          <p class="card-description" style = "max-width: 300px; max-height : 60px; overflow: hidden;"> ${item.Description}...</p>
+                          <button class="decrease-quantity" onClick = "decreaseQuantity()">-</button>
+                          <input type="text" class="quantity" value="1" min="1" readOnly>
+                          <button class="increase-quantity" onClick = "increaseQuantity()">+</button>
+                        </div>
+                        <span class="card-icon" id = "delete-card">
+                            <button id = "delete-item" class = "delete">
+                                <i id = "delete-icon"class="fa-solid fa-trash" style = "scale = 1.3;"></i>
+                            </button>
+                        </span>
+                      </div>`;
+                      $('#container').append(productDetail); // add all element one by one by appending to HTML
+                    }
+                });
+            });
+            checkListEmpty();
+            $('#item-count').text(jsonArray.length);
+            calculateTotalPrice()
+    
+            const childrenElements = $(this).children();
+    
+            // Loop through the children and do something with each child element
+            childrenElements.each(function (index) {
+                console.log("Child " + (index + 1) + ": " + $(this).text());
+            });
+    
+            $('.card').on('click', function (event) { // make a card clickable
+                const clickedElementId = $(event.target).attr("id"); // get the id of clicked item
+                console.log(clickedElementId);
+                 if (clickedElementId == 'delete-item' || clickedElementId == 'delete-card' || clickedElementId == 'delete-icon') {     // suggest a better approach for inner clickable button
+                     item = event.target.closest('.card'); // if trash icon is clicked open a alert dialog
+                     deleteItem(event); 
+                 }else {
+                    const product = event.target.closest(".card"); // if a card is clicked get its id 
+                    var url = 'productDetails.html?id=' + product.id; // send id attribute of the product to prdct details page
+                    window.location.href = url;
+                }
+            });
+
+
+            $('delete-item').on('click', function (event) { // trash icon is clicked
+                event.stopPropagation();
+                const clickedElement = event.target;
+                console.log(clickedElement);
+                item = clickedElement.closest('.card'); // suggest better suggestion
+                if (item) {
+                    showAlert();
+                }
+            })
+            console.log(jsonData);
+           //prepareUI(jsonData); // render the data in the ui and make it meaningful
+        } catch (error) {
+            console.error('Error fetching data:', error.message); // an error occured while fetching the data
+        }
+    }
+
+
+    function prepareUI(jsonData){
+        console.log("inside prepare UI")
+        
+  
+    }
+
+/*   fetch('./data/products.json')
     .then(response => response.json())
     .then(data => {
         const jsonArray = JSON.parse(localStorage.getItem('IDs'));
-
         jsonArray.forEach(element => {
             for (let key in data) {
                 if (data[key].id == element) {
@@ -54,11 +139,8 @@ fetch('./data/products.json')
         <img src="${data[key].productImage}" alt="Card Image" class="card-image">
         <div class="card-content">
             <h3 class="card-title" id = "product-name">${data[key].name} </h3>
-            
           <p class="card-price">$${data[key].price}</p>
-
           <p class="card-description" style = "max-width: 300px; max-height : 60px; overflow: hidden;"> ${data[key].Description}...</p>
-
           <button class="decrease-quantity" onClick = "decreaseQuantity()">-</button>
           <input type="text" class="quantity" value="1" min="1" readOnly>
           <button class="increase-quantity" onClick = "increaseQuantity()">+</button>
@@ -92,21 +174,18 @@ fetch('./data/products.json')
              if (clickedElementId == 'delete-item' || clickedElementId == 'delete-card' || clickedElementId == 'delete-icon') { // suggest a better approach for inner clickable button
                  console.log('Button inside card clicked');
                  item = event.target.closest('.card'); // suggest better suggestion
-
                  deleteItem(event)
              }else {
                 //const productId = this.id; should be passed parametre to the link
                 const children = this.children;
+                const product = event.target.closest(".card");
                 const firstElement = children[1]; // suggest a better approach to find h3 element
                 const secondElement = firstElement.children;
                 const targetElement = secondElement[0];
                 let productName = targetElement.textContent;
-                var url = 'productDetails.html?name=' + productName;
+                var url = 'productDetails.html?id=' + product.id;
                 window.location.href = url;
             }
-
-
-
         });
         $('delete-item').on('click', function (event) {
             event.stopPropagation();
@@ -118,10 +197,9 @@ fetch('./data/products.json')
             }
         })
 
-    });
+    });     */
 
 function deleteItem(event) {
-
     const clickedElement = event.target;
     console.log(clickedElement);
     item = clickedElement.closest('.card'); // suggest better suggestion
@@ -133,23 +211,21 @@ function deleteItem(event) {
     if (cardElement) {
         var idOfProduct = cardElement.id;
         removeID(idOfProduct);
-        cardElement.remove();
+        cardElement.remove();<
         checkListEmpty();
         
     } */
 }
 
 
-function removeItem() {
+function removeItem() { 
     if (item) {
-        updateSummary(item);
-        console.log("removed item "+item);
+        updateSummary(item); // update checkout details
         var idOfProduct = item.id;
-        removeID(idOfProduct);
-        hideAlert();
-        const parentElement = item.querySelector(".card-content");
-        item.remove();
-        checkListEmpty();
+        removeID(idOfProduct); // remove product id from cart list
+        hideAlert(); // hide alert dialog the user pressed cancel or delete
+        item.remove(); // that basic code snippet removes the element from HTML
+        checkListEmpty(); // check list is empty, if it's empty show a message
     }
 }
 
@@ -203,15 +279,13 @@ function saveIDsToLocalStorage(IDs) {
 const listContainer = document.getElementById('container');
 const emptyListMessage = document.getElementById('empty-list-message');
 
-function checkListEmpty() {
-    console.log(listContainer.childElementCount + "hello");
-
+function checkListEmpty() { // checks if the cart list is empty
     if (listContainer.childElementCount === 0) {
-        emptyListMessage.style.display = 'block';
-        $('.order-summary').hide()
+        emptyListMessage.style.display = 'block'; // show empty list message
+        $('.order-summary').hide() // hide checkout section
     } else {
         emptyListMessage.style.display = 'none';
-        $('.order-summary').show()
+        $('.order-summary').show() 
     }
 }
 
@@ -233,7 +307,6 @@ function calculateTotalPrice() {
         let number = parseInt(each);
         total += number;
     })
-
 
     $('#total-price').text(total);
 
@@ -259,8 +332,6 @@ function calculateTotalPrice() {
 }
 
 function updateSummary(item) {
-    console.log("updateSummary "+item);
-    const itemPrice = $(item).find('card-price');
     let priceString = item.querySelector('.card-price');
     const price = priceString.textContent.match(/\d+(\.\d+)?/g);
     console.log("the price is "+ price[0]);
@@ -331,3 +402,34 @@ function decreaseQuantity() {
     console.log(currentQuantity);
     console.log($('.quantity').text());
 }
+
+
+
+
+
+const person = {
+    name: 'John Doe', // can be accessed as person.name
+    age: 30,
+    isEmployed: true
+};
+
+
+
+
+
+const fruits = ['apple', 'banana', 'orange'];
+fruits.push('grape'); // add element
+fruits.pop(); // remove last element
+fruits.length; // lenght of the array
+fruits.indexOf('banana'); // gives index of the element
+
+
+
+
+
+
+
+
+
+
+
