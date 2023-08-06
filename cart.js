@@ -45,7 +45,7 @@ fetch('./footer.html')
     });
 let jsonData;
     async function fetchData() {
-        const apiUrl = 'http://localhost:5050/api'; // url to fetch data
+        const apiUrl = 'https://ahmetozydn.github.io/api/products.json'; // url to fetch data
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {

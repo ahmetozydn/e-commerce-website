@@ -169,7 +169,7 @@
    
     var jsonData;
     async function fetchData() {
-        const apiUrl = 'http://localhost:5050/api';
+        const apiUrl = 'https://ahmetozydn.github.io/api/products.json';
         try {
             const response = await fetch(apiUrl);
 
@@ -198,16 +198,14 @@
           <p class="card-description" style = "max-width: 300px; max-height : 60px; overflow: hidden;"> ${element.Description}...</p>
         </div>
       </div>`
-
                     $(".content-container").append(item); // append container element with each result product
 
                     $('.card').on('click', function (event) {
                         const productId = $(event.target).attr("id"); //$(event.target).hasClass('')
                         //const productId = this.id; should be passed parametre to the link
-                        const card = event.target.closest('.card');
-
-                        var url = 'productDetails.html?id=' + card.id;
-                        window.location.href = url;
+                        const card = event.target.closest('.card'); // find the closest cart to the clicked element
+                        var url = 'productDetails.html?id=' + card.id; // open productDetails page with sendind prdct id
+                        window.location.href = url; // open new page
                     });
 
                 });
