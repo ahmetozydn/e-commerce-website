@@ -1,147 +1,198 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Header of the Website</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header of the Website</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <style>
-    ul.nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #ffffff;
-}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-ul.nav li {
-  display: inline;
-}
+    <style>
+      ul.nav {
+        list-style-type: none;
+        margin: 0;
+        padding: 10px;
+        overflow: hidden;
+        background-color: #ffffff;
+      }
 
-ul.nav li a {
-  display: block;
-  padding: 8px 16px;
-  text-decoration: none;
-  color: #000;
-}
+      ul.nav li {
+        display: inline;
+      }
 
-ul.nav li a:hover {
-  background-color: #de1f1f;
-}
+      ul.nav li a {
+        display: block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: #000;
+      }
 
-ul a:hover{
-  color: rgb(255, 157, 0);
-}
-.no-padding {
-width: 100% !important;
-height: 30% !important;
-padding: 0 0 100 10 !important;
-margin: 0 0 100 10 !important;
-z-index: 1  !important;
-position: relative;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-}
-.icon {
-  cursor: pointer;
-}
+      ul.nav li a:hover {
+        background-color: #de1f1f;
+      }
 
-.no-strike {
-text-decoration: none;
-font-weight: bold;
-font-size: 18px;
-padding: 12px;
-color: black;
-letter-spacing: 0px;
-}
-.navbar {
-  background-color: #3b5998;
-  font-size: 22px;
-  padding: 5px 10px;
-}
+      ul a:hover {
+        color: rgb(255, 157, 0);
+      }
+      .no-padding {
+        width: 100% !important;
+        height: 30% !important;
+        padding: 0 0 100 10 !important;
+        margin: 0 0 100 10 !important;
+        z-index: 1 !important;
+        position: relative;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .icon {
+        cursor: pointer;
+      }
 
-/* Define what each icon button should look like */
-.button {
-  color: white;
-  display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
-  position: relative; /* All 'absolute'ly positioned elements are relative to this one */
-  float: right;
-  padding: 2px 5px; /* Add some padding so it looks nice */
-  cursor: pointer;
-}
+      .no-strike {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 12px;
+        color: black;
+        letter-spacing: 0px;
+      }
+      .navbar {
+        background-color: #3b5998;
+        font-size: 22px;
+        padding: 5px 10px;
+      }
 
-/* Make the badge float in the top right corner of the button */
-.button__badge {
-  background-color: #fa3e3e;
-  border-radius: 2px;
-  color: white;
- 
-  padding: 1px 3px;
-  font-size: 10px;
-  
-  position: absolute; /* Position the badge within the relatively positioned button */
-  top: 0;
-  right: 0;
-}
-.website-name{
-  cursor: pointer;
-}
+      /* Make the badge float in the top right corner of the button */
+      .button__badge {
+        background-color: #fa3e3e;
+        border-radius: 2px;
+        color: white;
 
-#search-input{
-  border-radius: 4px;
-  margin: 0px;
-  font-size: 16px;
-  width: 300px;
-  height: 40px;
-  padding-left: 16px;
-}
-#search-button{
-  border-radius: 4px;
-  margin: 0px;
-  color: #f0900a;
-  height: 40px;
-  width: 60px;
-  padding: 0px;
-  cursor: pointer;
-}
-.input-group{
-  padding: 0px;
-  height: 40px;
-  margin: 0px;
-  margin-left: 20px;
-}
+        padding: 1px 3px;
+        font-size: 10px;
 
-</style>
-</head>
-<body>
-  <div class="no-padding">
+        position: absolute; /* Position the badge within the relatively positioned button */
+        top: 0;
+        right: 0;
+      }
 
-    <ul class="nav" style="padding: 20px; margin: 0;">
-      <span class="website-name"><h2 style="display: inline; color: #f0900a;">Shopie</h2></span>
-      <a class="no-strike" href="#">Electronic</a>
-      <a class="no-strike" href="#">Smartphones</a>
-      <a class="no-strike" href="#">Tablet</a>
-      <a class="no-strike" href="#">Watch</a>
-      <a class="no-strike" href="temp.html">.temp</a>
-      <div class="input-group" style="display: inline;">
-        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id = "search-input" />
-        <button type="button" class="btn btn-outline-primary" id = "search-button">search</button>
-      </div>
-    <div class="button" id="openCart">
-      <i class="fa-solid fa-cart-shopping" style="color: #000; scale: 1.5;"></i>
-      <span class="button__badge" onclick="openCart"></span>
+      .nav {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0;
+      }
+
+      #search-input {
+        border-radius: 4px;
+        margin: 0px;
+        font-size: 16px;
+        width: 300px;
+        height: 40px;
+        padding-left: 16px;
+      }
+      #search-button {
+        border-radius: 4px;
+        margin: 0px;
+        background-color: #f9f6f6;
+        color: #80cd49;
+        border: 2px solid #3b800a;
+        height: 40px;
+        width: 60px;
+        margin-left: 2px;
+        padding: 4px;
+        cursor: pointer;
+      }
+
+      .input-group {
+        order: 1;
+        padding: 0px;
+        height: 40px;
+        margin: 0px;
+        margin-left: 20px;
+        display: inline;
+      }
+      #search-input:focus {
+        outline: none; /* Remove default focus outline */
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 4px;
+        border: 1px solid rgba(0, 117, 250, 0.3);
+
+      }
+      /* Define what each icon button should look like */
+      .cart-button {
+        color: white;
+        display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+        position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+        float: right;
+        padding: 2px 2px; /* Add some padding so it looks nice */
+        cursor: pointer;
+      }
+      @media (max-width: 767px) {
+        .nav {
+          padding: 8px !important;
+        }
+        .input-group {
+          padding: 10px 10px;
+          margin-bottom: 8px;
+          display: flex;
+          order: 2;
+        }
+        #search-input {
+          padding: 4px;
+          margin: 0px;
+          margin-right: 4px;
+          border: 1px solid #463f3f;
+        }
+
+        .cart-button {
+          color: white;
+          position: relative; /* Use relative positioning on phones */
+
+          right: 0;
+          padding: 2px 5px; /* Add some padding so it looks nice */
+          cursor: pointer;
+        }
+        .website-name {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="no-padding">
+      <ul class="nav">
+        <a href="home.html" class="no-strike website-name"
+          ><h2 style="display: inline; color: #f0900a">Shopie</h2></a
+        >
+       <!--  <a class="no-strike" href="temp.html">.temp</a> -->
+        <a class="cart-button" id="openCart">
+          <i
+            class="fa-solid fa-cart-shopping"
+            style="color: #000; scale: 1.5"
+          ></i>
+          <span class="button__badge" onclick="openCart"></span>
+        </a>
+        <div class="input-group">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            id="search-input"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            id="search-button"
+          >
+            Search
+          </button>
+        </div>
+      </ul>
     </div>
-    </ul>
-
-
-    
-  </div>
-<script>
-</script>
-</body>
+  </body>
 </html>
-
-
-

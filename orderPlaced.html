@@ -63,6 +63,12 @@
                 window.location.href = "./cart.html"
             })
             $('#openCart').hide()
+
+            $('#search-button').on('click', function () {
+            if ($('#search-input').val()) {
+            window.location.href = "./search.html?search="+$('#search-input').val();
+            }
+        });
         });
 
     fetch('./footer.html')

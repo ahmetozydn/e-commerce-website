@@ -1,4 +1,12 @@
+
+if (!localStorage.getItem('IDs')) {
+    let array = [];
+    let emptyJSON = JSON.stringify(array);
+    localStorage.setItem('IDs', emptyJSON);
+}
 fetchData();
+
+
 const prefersDarkMode = localStorage.getItem('dark-mode-preference');
 if (prefersDarkMode === 'dark') {
     document.body.classList.add('dark-mode');

@@ -1,6 +1,14 @@
 
 document.addEventListener('DOMContentLoaded', fetchData);
 
+
+
+if (!localStorage.getItem('IDs')) {
+    let array = [];
+    let emptyJSON = JSON.stringify(array);
+    localStorage.setItem('IDs', emptyJSON);
+}
+
 fetch('navigation.html') // get header from the file and append it to the element
     .then(response => response.text())
     .then(data => {
@@ -157,10 +165,10 @@ function onClickProduct() {
 
 
 
-$('#main-card-container').on('click', function(){
+$('#main-card-container').on('click', function () {
     var clickedElement = event.target; // get the clicked item
     const card = clickedElement.closest('.card'); // find the closes card to the clicked item
-    const productId = card.id; 
+    const productId = card.id;
     var url = 'productDetails.html?id=' + encodeURIComponent(productId); // burn the name to url as search parametre
     window.location.href = url; // open productDetails.html web page
 });

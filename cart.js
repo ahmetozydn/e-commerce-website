@@ -282,9 +282,11 @@ const emptyListMessage = document.getElementById('empty-list-message');
 function checkListEmpty() { // checks if the cart list is empty
     if (listContainer.childElementCount === 0) {
         emptyListMessage.style.display = 'block'; // show empty list message
-        $('.order-summary').hide() // hide checkout section
+        //$('.order-summary').hide() // hide checkout section
+        $('.main-container').hide();
     } else {
         emptyListMessage.style.display = 'none';
+       // $('.main-container').hide();
         $('.order-summary').show() 
     }
 }

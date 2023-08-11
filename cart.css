@@ -131,11 +131,10 @@ button {
 
 #empty-list-message {
     text-align: center;
-    position: fixed;
     padding: 20px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    height: 60vh;
 }
 
 .empty-icon {
@@ -156,6 +155,7 @@ i:hover {
     display: flex;
     justify-content: center;
 }
+
 
 #closeAlertButton {
     background-color: #ebe6df;
@@ -225,8 +225,36 @@ h2 {
 
 
 @media (max-width: 768px) {
-    .card {
+    .main-container{
+        overflow:hidden;
+        margin: 0px;
         width: 100%;
-        /* Set the card width to 100% of the screen on smaller devices */
+        display: block;
+      align-items: center;
+    }
+
+    #container{
+        width: inherit;
+        margin: 0;
+        padding: 0;
+    }
+    .card{
+        padding: 0;
+        width: 100%;
+        margin: 4px;
+        scale: 0.94;
+    }
+    .card img{
+        width: 30%;
+        height: 30%;
+    }
+    .card-description{
+        display: none;
+    }
+    .order-summary{
+        width: auto;
+        height: auto;
+        margin: auto;
+        float: inherit;
     }
 }
